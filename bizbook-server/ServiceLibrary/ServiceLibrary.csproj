@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Reports\AccountReportService2.cs" />
+    <Compile Remove="Reports\BaseReportService.cs" />
+    <Compile Remove="Reports\BaseReportService1.cs" />
+    <Compile Remove="Reports\IReportService.cs" />
+    <Compile Remove="Reports\ProductReportService.cs" />
+    <Compile Remove="Reports\ProductReportService2.cs" />
+    <Compile Remove="Reports\SaleReportService.cs" />
+    <Compile Remove="Reports\SchedulerService.cs" />
+    <Compile Remove="Reports\TransactionReportService.cs" />
+    <Compile Remove="Sales\SaleDetailService.cs" />
+    <Compile Remove="Subscription\HardwareInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\RequestModel\RequestModel.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\Users\foyzu\.nuget\packages\newtonsoft.json\11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Reports\" />
+  </ItemGroup>
+
+</Project>
