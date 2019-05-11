@@ -1,0 +1,17 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/bizbook-server/.vs/B2BCore/v16
+/bizbook-server/B2BCoreAuth/bin/Debug/netcoreapp2.1
+/bizbook-server/B2BCoreAuth/obj
+/bizbook-server/Model/bin/Debug/netcoreapp2.1
+/bizbook-server/Model/obj/Debug/netcoreapp2.1
+/bizbook-server/Model/obj
+/bizbook-server/RequestModel/bin/Debug/netcoreapp2.1
+/bizbook-server/RequestModel/obj
+/bizbook-server/ServiceLibrary/bin/Debug/netcoreapp2.1
+/bizbook-server/ServiceLibrary/obj
+/bizbook-server/ViewModel/bin/Debug/netcoreapp2.1
+/bizbook-server/ViewModel/obj
