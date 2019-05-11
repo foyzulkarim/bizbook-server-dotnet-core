@@ -15,3 +15,9 @@
 /bizbook-server/ServiceLibrary/obj
 /bizbook-server/ViewModel/bin/Debug/netcoreapp2.1
 /bizbook-server/ViewModel/obj
+/bizbook-server/.vs/B2BCore
+/bizbook-server/B2BCoreAuth/bin/Debug/netcoreapp2.2
+/bizbook-server/Model/bin/Debug/netcoreapp2.2
+/bizbook-server/RequestModel/bin/Debug/netcoreapp2.2
+/bizbook-server/ServiceLibrary/bin/Debug/netcoreapp2.2
+/bizbook-server/ViewModel/bin/Debug/netcoreapp2.2

@@ -46,10 +46,10 @@ namespace B2BCoreApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string s = Configuration.GetConnectionString("DefaultConnection");
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<SecurityDbContext>(options =>
-                options.UseSqlServer(s));
-            services.AddDbContext<BizBookInventoryContext>(options => options.UseSqlServer(s));
+                options.UseSqlServer(connectionString));
+            services.AddDbContext<BizBookInventoryContext>(options => options.UseSqlServer(connectionString));
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
@@ -144,12 +144,12 @@ namespace B2BCoreApi
             var smsHistoryBinder = new AbstractModelBinderProvider<SmsHistoryRequestModel>();
             var smsHookBinder = new AbstractModelBinderProvider<SmsHookRequestModel>();
             var smsBinder = new AbstractModelBinderProvider<SmsRequestModel>();
-           
+
             services.AddMvc(options =>
             {
                 //options.Filters.Add<BizBookAuthorizationAttribute>();
                 //options.Filters.Add<EntitySaveFilterAttribute>();     
-                
+
                 options.ModelBinderProviders.Insert(0, saleBinder);
                 options.ModelBinderProviders.Insert(1, addressBinder);
                 options.ModelBinderProviders.Insert(2, customersBinder);
@@ -189,7 +189,7 @@ namespace B2BCoreApi
                 options.ModelBinderProviders.Insert(36, smsBinder);
             });
 
-            services.AddLogging(optionsBuilder => optionsBuilder.AddSerilog(dispose: true));            
+            services.AddLogging(optionsBuilder => optionsBuilder.AddSerilog(dispose: true));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
