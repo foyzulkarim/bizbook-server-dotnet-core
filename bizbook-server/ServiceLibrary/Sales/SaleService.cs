@@ -24,7 +24,7 @@ namespace ServiceLibrary.Sales
     using System.Collections;
     using System.Transactions;
     using RequestModel.Sales;
-    
+
     using ServiceLibrary.Transactions;
 
     using ViewModel.Customers;
@@ -53,16 +53,16 @@ namespace ServiceLibrary.Sales
 
         //ProductReportService2 productReportService;
 
-      //  private AccountReportService2 accountReportService;
+        //  private AccountReportService2 accountReportService;
 
-      //  SaleReportService saleReportService;
+        //  SaleReportService saleReportService;
 
 
         public SaleService(Repo repository) : base(repository)
         {
             customerRepository = new BaseRepository<Customer>(Repository.Db);
             customerService = new CustomerService(customerRepository);
-            BaseRepository<Transaction> transactionRepo = new BaseRepository<Transaction>(db);
+            BaseRepository<Transaction> transactionRepo = new BaseRepository<Transaction>(Db);
             this.transactionService = new TransactionService(transactionRepo);
             this.productDetailRepository = new BaseRepository<ProductDetail>(repository.Db);
             this.addressRepository = new BaseRepository<Address>(repository.Db);
@@ -218,7 +218,7 @@ namespace ServiceLibrary.Sales
                     if (sale.IsDealerSale)
                     {
                         DealerProductService dealerProductService =
-                            new DealerProductService(new BaseRepository<DealerProduct>(db));
+                            new DealerProductService(new BaseRepository<DealerProduct>(Db));
                         dealerProductService.UpsertProductsByDealer(sale);
                     }
                 }
@@ -604,7 +604,7 @@ namespace ServiceLibrary.Sales
                     //}
 
                     UpdateProductDetail(dbSale);
-                   // UpdateProductReport(dbSale);
+                    // UpdateProductReport(dbSale);
                     this.customerService.UpdatePoint(sale.CustomerId);
                     scope.Complete();
                 }
@@ -873,7 +873,7 @@ namespace ServiceLibrary.Sales
                 dbSale.DeliveryChargeAmount = sale.DeliveryChargeAmount;
                 dbSale.DiscountAmount = sale.DiscountAmount;
 
-                dbSale.Modified=DateTime.Now;
+                dbSale.Modified = DateTime.Now;
                 dbSale.ModifiedBy = sale.ModifiedBy;
 
                 this.Repository.Db.SaveChanges();
@@ -1236,7 +1236,7 @@ namespace ServiceLibrary.Sales
                 qSales = qSales.Where(x => x.SaleFrom == request.SaleFrom);
             }
 
-            var qGroupBy = qSales.Include(x=>x.Customer).GroupBy(x => x.Created.Date);
+            var qGroupBy = qSales.Include(x => x.Customer).GroupBy(x => x.Created.Date);
             var list1 = await qGroupBy.OrderBy(x => x.Key).Select(
                 x => new
                 {
@@ -1291,7 +1291,7 @@ namespace ServiceLibrary.Sales
             request.StartDate = request.StartDate.Date;
             request.EndDate = request.EndDate.Date;
 
-            var saleDetails = db.SaleDetails.AsQueryable();
+            var saleDetails = Db.SaleDetails.AsQueryable();
             if (!string.IsNullOrWhiteSpace(request.WarehouseId))
             {
                 saleDetails = saleDetails.Where(x => x.WarehouseId == request.WarehouseId);
@@ -1324,7 +1324,7 @@ namespace ServiceLibrary.Sales
             request.StartDate = request.StartDate.Date;
             request.EndDate = request.EndDate.Date;
 
-            var saleDetails = db.SaleDetails.AsQueryable();
+            var saleDetails = Db.SaleDetails.AsQueryable();
             if (!string.IsNullOrWhiteSpace(request.WarehouseId))
             {
                 saleDetails = saleDetails.Where(x => x.WarehouseId == request.WarehouseId);
@@ -1357,7 +1357,7 @@ namespace ServiceLibrary.Sales
             request.StartDate = request.StartDate.Date;
             request.EndDate = request.EndDate.Date;
 
-            var saleDetails = db.SaleDetails.AsQueryable();
+            var saleDetails = Db.SaleDetails.AsQueryable();
             if (!string.IsNullOrWhiteSpace(request.WarehouseId))
             {
                 saleDetails = saleDetails.Where(x => x.WarehouseId == request.WarehouseId);

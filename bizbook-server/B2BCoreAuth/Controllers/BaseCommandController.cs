@@ -13,25 +13,25 @@ using Microsoft.AspNetCore.Http;
 
 namespace B2BCoreApi.Controllers
 {
-    [BizBookAuthorization]
-    public abstract class BaseCommandController<T, TRm, TVm> : Controller where T : Entity where TRm : RequestModel<T> where TVm : BaseViewModel<T>
+    //[BizBookAuthorization]
+    public abstract class BaseCommandController<T, TRm, TVm> : ControllerBase where T : Entity where TRm : RequestModel<T> where TVm : BaseViewModel<T>
     {
         public ILogger Logger;
-        protected BaseService<T, TRm, TVm> Service;
+        protected IBaseService<T, TRm, TVm> Service;
         protected string typeName = string.Empty;
         public ApplicationUser AppUser;
 
-        protected BaseCommandController(BaseService<T, TRm, TVm> service, ILogger logger)
+        protected BaseCommandController(IBaseService<T, TRm, TVm> service, ILogger logger)
         {
             Service = service;
             typeName = typeof(T).Name;
             this.Logger = logger;
-        }     
+        }
 
         [HttpPost]
         [Route("Add")]
         [ActionName("Add")]
-        [EntitySaveFilter]
+        //[EntitySaveFilter]
         public virtual ActionResult Add([FromBody] T model)
         {
             T data = model;
@@ -56,7 +56,7 @@ namespace B2BCoreApi.Controllers
                     this.AppUser);
 
                 var result = StatusCode(StatusCodes.Status500InternalServerError, exception);
-                return result;                
+                return result;
             }
         }
 
@@ -76,7 +76,7 @@ namespace B2BCoreApi.Controllers
             try
             {
                 var edit = Service.Edit(model);
-                Logger.LogDebug("User {@UserName} ConnectionId {@ConnectionId} edited entity {TypeName} {@Id}", this.AppUser.UserName, this.AppUser.ConnectionId, typeName, data.Id);                
+                Logger.LogDebug("User {@UserName} ConnectionId {@ConnectionId} edited entity {TypeName} {@Id}", this.AppUser.UserName, this.AppUser.ConnectionId, typeName, data.Id);
                 return Ok(edit);
             }
             catch (Exception exception)

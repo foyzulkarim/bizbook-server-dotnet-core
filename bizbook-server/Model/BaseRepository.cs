@@ -8,11 +8,10 @@ using Model.Model;
 
 namespace Model
 {
-    public class BaseRepository<TEntity> where TEntity : Entity
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : Entity
     {
-        public DbContext Db;
 
-        public BaseRepository(DbContext db)
+        public BaseRepository(BizBookInventoryContext db)
         {
             Db = db;
         }
@@ -38,7 +37,7 @@ namespace Model
             if (orderBy != null)
             {
                 query = orderBy(query);
-            }        
+            }
             return query;
         }
 
@@ -59,7 +58,7 @@ namespace Model
 
         public virtual EntityEntry<TEntity> Add(TEntity entity)
         {
-            return Db.Set<TEntity>().Add(entity);            
+            return Db.Set<TEntity>().Add(entity);
         }
 
         public virtual IEnumerable<TEntity> Add(IEnumerable<TEntity> entities)
@@ -78,7 +77,7 @@ namespace Model
         public virtual bool Delete(string id)
         {
             TEntity entity = GetById(id);
-            if (entity!=null)
+            if (entity != null)
             {
                 Db.Set<TEntity>().Remove(entity);
             }
@@ -96,5 +95,7 @@ namespace Model
             var changes = Db.SaveChanges();
             return changes > 0;
         }
+
+        public BizBookInventoryContext Db { get; set; }
     }
 }

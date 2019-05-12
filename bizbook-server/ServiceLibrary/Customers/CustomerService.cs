@@ -15,12 +15,12 @@ namespace ServiceLibrary.Customers
     public class CustomerService : BaseService<M, Rm, Vm>, IWooCommerceService
     {
         public CustomerService(Repo repository) : base(repository)
-        {  
+        {
         }
 
         public bool UpdatePoint(string customerId)
         {
-            M customer = db.Customers.Include(x => x.Sales).FirstOrDefault(x => x.Id == customerId);
+            M customer = Db.Customers.Include(x => x.Sales).FirstOrDefault(x => x.Id == customerId);
 
             bool updatePoint = false;
             if (customer?.Sales != null)
@@ -30,7 +30,7 @@ namespace ServiceLibrary.Customers
                 double discount = sales.Sum(x => x.DiscountAmount);
                 double orderAmount = sales.Sum(x => x.PayableTotalAmount);
 
-                var transactions = this.db.Transactions.Where(x => x.ParentId == customerId);
+                var transactions = this.Db.Transactions.Where(x => x.ParentId == customerId);
                 var paids = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Income);
 
                 double customerPaidTotal = 0;
@@ -79,6 +79,6 @@ namespace ServiceLibrary.Customers
                 }
                 count = count + 1;
             } while (true);
-        }        
+        }
     }
 }

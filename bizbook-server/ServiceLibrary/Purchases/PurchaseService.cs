@@ -15,7 +15,7 @@ namespace ServiceLibrary.Purchases
 {
     using System.Collections.Generic;
     using System.Transactions;
-    
+
     using Transaction = Model.Model.Transaction;
     using ViewModel.Transactions;
     using System.Threading.Tasks;
@@ -78,7 +78,7 @@ namespace ServiceLibrary.Purchases
                     UpdateProductDetail(purchase);
                     AddTransaction(purchase);
 
-                    SupplierProductService supplierProductService=new SupplierProductService(new BaseRepository<SupplierProduct>(db));
+                    SupplierProductService supplierProductService = new SupplierProductService(new BaseRepository<SupplierProduct>(Db));
                     supplierProductService.UpsertProductsBySupplier(purchase);
                 }
                 scope.Complete();
@@ -92,7 +92,7 @@ namespace ServiceLibrary.Purchases
         private void UpdateAccountReport(Purchase purchase)
         {
             AccountHead accountHead = this.GetPurchaseAccountHead(purchase);
-           // this.accountReportService.QuickUpdate(purchase.ShopId, accountHead.Id, purchase.Created);
+            // this.accountReportService.QuickUpdate(purchase.ShopId, accountHead.Id, purchase.Created);
         }
 
         private void UpdateProductReport(Purchase purchase)
@@ -316,7 +316,7 @@ namespace ServiceLibrary.Purchases
                     if (productDetail != null)
                     {
                         productDetail.Purchased = purchased;
-                        productDetail.OnHand = productDetail.Purchased + productDetail.StartingInventory - productDetail.Sold;                         
+                        productDetail.OnHand = productDetail.Purchased + productDetail.StartingInventory - productDetail.Sold;
                     }
 
                     var warehouseProduct = this.Repository.Db.Set<WarehouseProduct>().FirstOrDefault(
@@ -324,13 +324,13 @@ namespace ServiceLibrary.Purchases
                     if (warehouseProduct == null)
                     {
                         warehouseProduct = new WarehouseProduct
-                                               {
-                                                   ShopId = purchase.ShopId,
-                                                   WarehouseId = purchase.WarehouseId,
-                                                   MinimumStockToNotify =
+                        {
+                            ShopId = purchase.ShopId,
+                            WarehouseId = purchase.WarehouseId,
+                            MinimumStockToNotify =
                                                        productDetail.MinimumStockToNotify,
-                                                   ProductDetailId = productDetail.Id,
-                                               };
+                            ProductDetailId = productDetail.Id,
+                        };
                         this.AddCommonValues(purchase, warehouseProduct);
                         this.Repository.Db.Set<WarehouseProduct>().Add(warehouseProduct);
                         Repository.Save();

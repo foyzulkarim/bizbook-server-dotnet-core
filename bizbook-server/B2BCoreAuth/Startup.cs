@@ -28,6 +28,7 @@ using RequestModel.Transactions;
 using RequestModel.Warehouses;
 using Serilog;
 using Serilog.Core;
+using ServiceLibrary;
 
 namespace B2BCoreApi
 {
@@ -52,6 +53,8 @@ namespace B2BCoreApi
             services.AddDbContext<BizBookInventoryContext>(options => options.UseSqlServer(connectionString));
 
             services.AddSingleton<IJwtFactory, JwtFactory>();
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient(typeof(IBaseService<,,>), typeof(BaseService<,,>));
 
             const string bizbook365Com = "bizbook365.com";
 
@@ -107,6 +110,13 @@ namespace B2BCoreApi
             builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
             builder.AddEntityFrameworkStores<SecurityDbContext>().AddDefaultTokenProviders();
 
+            BindRequestModels(services);
+
+            services.AddLogging(optionsBuilder => optionsBuilder.AddSerilog(dispose: true));
+        }
+
+        private static void BindRequestModels(IServiceCollection services)
+        {
             var saleBinder = new AbstractModelBinderProvider<SaleRequestModel>();
             var addressBinder = new AbstractModelBinderProvider<AddressRequestModel>();
             var customersBinder = new AbstractModelBinderProvider<CustomerRequestModel>();
@@ -188,8 +198,6 @@ namespace B2BCoreApi
                 options.ModelBinderProviders.Insert(35, smsHookBinder);
                 options.ModelBinderProviders.Insert(36, smsBinder);
             });
-
-            services.AddLogging(optionsBuilder => optionsBuilder.AddSerilog(dispose: true));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

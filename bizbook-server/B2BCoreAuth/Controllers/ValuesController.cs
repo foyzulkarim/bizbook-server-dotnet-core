@@ -16,11 +16,11 @@ namespace B2BCoreApi.Controllers
             _db = db;
         }
         // GET api/values
-//        [Authorize]
+        //        [Authorize]
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] {_db.Users.Count(x => x.IsActive).ToString(), DateTime.Now.ToString()};
+            return new string[] { _db.Users.Count(x => x.IsActive).ToString(), DateTime.Now.ToString() };
         }
 
         // GET api/values/5
@@ -32,8 +32,9 @@ namespace B2BCoreApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post(string value)
         {
+            return Ok(value);
         }
 
         // PUT api/values/5

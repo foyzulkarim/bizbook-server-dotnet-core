@@ -11,22 +11,23 @@ using ViewModel;
 
 namespace ServiceLibrary
 {
-    public static class UtilityServices{
+    public static class UtilityServices
+    {
         public static string Cut(this string s, int length)
         {
             return s.Length > length ? s.Substring(0, length) : s;
         }
     }
 
-    public class BaseService<T, TRm, TVm> where T : Entity where TRm : RequestModel<T> where TVm : BaseViewModel<T>
+    public class BaseService<T, TRm, TVm> : IBaseService<T, TRm, TVm> where T : Entity where TRm : RequestModel<T> where TVm : BaseViewModel<T>
     {
-        protected BaseRepository<T> Repository;
-        protected BizBookInventoryContext db;
+        protected IBaseRepository<T> Repository;
+        protected BizBookInventoryContext Db;
 
-        public BaseService(BaseRepository<T> repository)
+        public BaseService(IBaseRepository<T> repository)
         {
             Repository = repository;
-            db = repository.Db as BizBookInventoryContext;            
+            Db = repository.Db;
         }
 
         public virtual bool Add(T entity)
@@ -73,7 +74,7 @@ namespace ServiceLibrary
         public async Task<List<TVm>> GetAllAsync()
         {
             var queryable = await Repository.Get().ToListAsync();
-            var vms = queryable.Select(x => (TVm)Activator.CreateInstance(typeof(TVm), new object[] { x }));
+            var vms = queryable.Select(x => (TVm)Activator.CreateInstance(typeof(TVm), x));
             return vms.ToList();
         }
 
@@ -102,7 +103,7 @@ namespace ServiceLibrary
             {
                 queryable = request.IncludeParents(queryable);
             }
-            
+
             var list = await queryable.ToListAsync();
             List<TVm> vms = list.ConvertAll(CreateVmInstance);
             return new Tuple<List<TVm>, int>(vms, count);
