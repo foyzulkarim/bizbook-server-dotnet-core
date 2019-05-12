@@ -21,3 +21,5 @@
 /bizbook-server/RequestModel/bin/Debug/netcoreapp2.2
 /bizbook-server/ServiceLibrary/bin/Debug/netcoreapp2.2
 /bizbook-server/ViewModel/bin/Debug/netcoreapp2.2
+/bizbook-server/ApiTestProject/bin/Debug/netcoreapp2.2
+/bizbook-server/ApiTestProject/obj

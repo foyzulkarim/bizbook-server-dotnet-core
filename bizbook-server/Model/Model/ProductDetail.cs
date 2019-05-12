@@ -101,7 +101,10 @@ namespace Model.Model
         public string ProductCode { get; set; }
 
         public Brand Brand { get; set; }
+
+        [ForeignKey("ProductCategoryId")]
         public ProductCategory ProductCategory { get; set; }
+
         public ICollection<Damage> Damages { get; set; }
 
         public ICollection<DealerProduct> DealerProducts { get; set; }

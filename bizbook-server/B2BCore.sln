@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2015
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B2BCoreApi", "B2BCoreAuth\B2BCoreApi.csproj", "{C0FA6F81-D714-4102-ACF2-7700050DCB60}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 Service", "02 Service", "{2B8D3A73-9ABC-4559-8062-23BBDAECF0A2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 Model", "03 Model", "{0DB425B2-7C26-4CD0-BA4A-D9F93A9A2547}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 Tests", "04 Tests", "{CCE10C50-B9DB-4B62-9B6E-C67BB8466E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiIntegrationTestProject", "ApiTestProject\ApiIntegrationTestProject.csproj", "{6A76E0A5-2F7E-4356-9820-EF5E91D1B47A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,10 @@ Global
 		{99BD515C-65D2-4FBC-876B-318B518BED23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99BD515C-65D2-4FBC-876B-318B518BED23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99BD515C-65D2-4FBC-876B-318B518BED23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A76E0A5-2F7E-4356-9820-EF5E91D1B47A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A76E0A5-2F7E-4356-9820-EF5E91D1B47A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A76E0A5-2F7E-4356-9820-EF5E91D1B47A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A76E0A5-2F7E-4356-9820-EF5E91D1B47A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{23E62E6A-E2E7-421E-AC0C-DD46C9132A86} = {2B8D3A73-9ABC-4559-8062-23BBDAECF0A2}
 		{FABBB507-5DAD-4418-900B-81CD4E0BA6A7} = {0DB425B2-7C26-4CD0-BA4A-D9F93A9A2547}
 		{99BD515C-65D2-4FBC-876B-318B518BED23} = {0DB425B2-7C26-4CD0-BA4A-D9F93A9A2547}
+		{6A76E0A5-2F7E-4356-9820-EF5E91D1B47A} = {CCE10C50-B9DB-4B62-9B6E-C67BB8466E61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E5852D78-3F99-4542-9918-66A6D19BE14A}
