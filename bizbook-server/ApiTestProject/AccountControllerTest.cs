@@ -48,7 +48,7 @@ namespace ApiIntegrationTestProject
 
             request.AddJsonBody(model);
             var response = client.Execute(request);
-            //response.StatusCode.ShouldBe(HttpStatusCode.OK);
+            response.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
     }
 }
