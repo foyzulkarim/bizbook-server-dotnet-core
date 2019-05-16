@@ -30,5 +30,9 @@ namespace B2BCoreApi.Models
         [Required]
         [Display(Name = "Phone")]
         public string Phone { get; set; }
+
+        public string ShopId { get; set; }
+
+        public string RoleId { get; set; }
     }
 }

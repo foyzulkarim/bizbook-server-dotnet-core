@@ -40,7 +40,8 @@ namespace B2BCoreApi.Controllers
                 Email = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                PhoneNumber = model.Phone
+                PhoneNumber = model.Phone,
+                ShopId = model.ShopId
             };
 
             IdentityResult result = await userManager.CreateAsync(user, model.Password);
