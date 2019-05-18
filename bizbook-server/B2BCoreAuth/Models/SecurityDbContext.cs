@@ -15,10 +15,5 @@ namespace B2BCoreApi.Models
         public DbSet<ApplicationUserRole> ApplicationUserRoles { get; set; }
         public DbSet<ApplicationPermission> Permissions { get; set; }
         public DbSet<ApplicationResource> Resources { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {            
-            base.OnModelCreating(builder);
-        }
     }
 }
