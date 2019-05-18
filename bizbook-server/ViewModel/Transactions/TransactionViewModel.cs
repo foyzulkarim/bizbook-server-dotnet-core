@@ -1,5 +1,6 @@
 ﻿using Model.Constants;
 using Model.Model;
+using Model.Model.Transactions;
 
 namespace ViewModel.Transactions
 {
@@ -14,7 +15,7 @@ namespace ViewModel.Transactions
             TransactionFlowType = x.TransactionFlowType.ToString();
             TransactionWith = x.TransactionWith;
             TransactionMedium = x.TransactionMedium;
-            TransactionMediumName = x.TransactionMediumName;
+
             ParentId = x.ParentId;
             OrderNumber = x.OrderNumber;
             Amount = x.Amount;
@@ -28,16 +29,16 @@ namespace ViewModel.Transactions
             }
 
             ContactPersonPhone = x.ContactPersonPhone;
-            AccountHeadName = x.AccountHeadName;
+
             AccountHeadId = x.AccountHeadId;
             ShopId = x.ShopId;
             OrderId = x.OrderId;
-            PaymentGatewayService = x.PaymentGatewayService.ToString();
+
             PaymentGatewayServiceName = PaymentGatewayService;
-            AccountInfoId = x.AccountInfoId;
-            if (x.AccountInfo != null)
+            WalletId = x.WalletId;
+            if (x.WalletId != null)
             {
-                AccountInfoTitle = x.AccountInfo.AccountTitle;
+                AccountInfoTitle = x.Wallet.Title;
             }
         }
 
@@ -81,7 +82,7 @@ namespace ViewModel.Transactions
 
         public string AccountHeadId { get; set; }
 
-        public string AccountInfoId { get; set; }
+        public string WalletId { get; set; }
 
         public string AccountInfoTitle { get; set; }
     }

@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Model.Constants;
 using Model.Model;
+using Model.Model.Transactions;
 using Vm = ViewModel.Shops.SupplierViewModel;
 using Rm = RequestModel.Shops.SupplierRequestModel;
-using M = Model.Model.Supplier;
-using Repo = Model.BaseRepository<Model.Model.Supplier>;
+using M = Model.Model.Purchases.Supplier;
+using Repo = Model.BaseRepository<Model.Model.Purchases.Supplier>;
 
 namespace ServiceLibrary.Shops
 {
@@ -15,7 +16,7 @@ namespace ServiceLibrary.Shops
     using RequestModel.Purchases;
     using RequestModel.Transactions;
 
-    using Purchases;
+    //using Purchases;
 
     using ViewModel.History;
     using ViewModel.Purchases;
@@ -32,10 +33,11 @@ namespace ServiceLibrary.Shops
 
         public async Task<Tuple<List<HistoryViewModel>, int>> GetHistory(Rm rm)
         {
-            PurchaseService service = new PurchaseService(new BaseRepository<Purchase>(Repository.Db));
+            //PurchaseService service = new PurchaseService(new BaseRepository<Purchase>(Repository.Db));
             PurchaseRequestModel request = new PurchaseRequestModel("")
             { ShopId = rm.ShopId, ParentId = rm.ParentId, Page = -1 };
-            Tuple<List<PurchaseViewModel>, int> result = await service.SearchAsync(request);
+            //Tuple<List<PurchaseViewModel>, int> result = await service.SearchAsync(request);
+            Tuple<List<PurchaseViewModel>, int> result = null;
             List<HistoryViewModel> viewModels = result.Item1.ConvertAll(x => new HistoryViewModel(x)).ToList();
             var transactionService = new BaseService<Transaction, TransactionRequestModel, TransactionViewModel>(new BaseRepository<Transaction>(Repository.Db));
             Tuple<List<TransactionViewModel>, int> transactionTuple =
@@ -56,45 +58,46 @@ namespace ServiceLibrary.Shops
 
         public bool UpdateAmount(string id)
         {
-            var supplier = Repository.Get().Include(x => x.Purchases).FirstOrDefault(x => x.Id == id);
+            //var supplier = Repository.Get().Include(x => x.Purchases).FirstOrDefault(x => x.Id == id);
 
-            bool updatePoint = false;
-            if (supplier?.Purchases != null)
-            {
-                var purchases = supplier.Purchases.Where(x => x.IsActive);
-                double productAmount = purchases.Sum(x => x.ProductAmount);
-                double discount = purchases.Sum(x => x.DiscountAmount);
-                double totalAmount = purchases.Sum(x => x.TotalAmount);
+            //bool updatePoint = false;
+            //if (supplier?.Purchases != null)
+            //{
+            //    var purchases = supplier.Purchases.Where(x => x.IsActive);
+            //    double productAmount = purchases.Sum(x => x.ProductAmount);
+            //    double discount = purchases.Sum(x => x.DiscountAmount);
+            //    double totalAmount = purchases.Sum(x => x.TotalAmount);
 
-                var transactions = this.db.Transactions.Where(x => x.ParentId == id);
-                var paids = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Income);
+            //    var transactions = this.db.Transactions.Where(x => x.ParentId == id);
+            //    var paids = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Income);
 
-                double paidTotal = 0;
-                if (paids.Any())
-                {
-                    paidTotal = paids.Sum(x => x.Amount);
-                }
+            //    double paidTotal = 0;
+            //    if (paids.Any())
+            //    {
+            //        paidTotal = paids.Sum(x => x.Amount);
+            //    }
 
-                var returneds = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Expense);
-                double returnedTotal = 0;
-                if (returneds.Any())
-                {
-                    returnedTotal = returneds.Sum(x => x.Amount);
-                }
+            //    var returneds = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Expense);
+            //    double returnedTotal = 0;
+            //    if (returneds.Any())
+            //    {
+            //        returnedTotal = returneds.Sum(x => x.Amount);
+            //    }
 
-                double actualPaid = paidTotal - returnedTotal;
+            //    double actualPaid = paidTotal - returnedTotal;
 
-                supplier.OrdersCount = purchases.Count();
-                supplier.ProductAmount = productAmount;
-                supplier.TotalDiscount = discount;
-                supplier.TotalAmount = totalAmount;
-                supplier.TotalPaid = actualPaid;
-                supplier.TotalDue = totalAmount - actualPaid;
+            //    supplier.OrdersCount = purchases.Count();
+            //    supplier.ProductAmount = productAmount;
+            //    supplier.TotalDiscount = discount;
+            //    supplier.TotalAmount = totalAmount;
+            //    supplier.TotalPaid = actualPaid;
+            //    supplier.TotalDue = totalAmount - actualPaid;
 
-                updatePoint = this.Edit(supplier);
-            }
+            //    updatePoint = this.Edit(supplier);
+            //}
 
-            return updatePoint;
+            //return updatePoint;
+            return true;
         }
     }
 }

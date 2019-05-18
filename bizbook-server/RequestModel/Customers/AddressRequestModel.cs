@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Model.Model;
+using Model.Model.Customers;
 using ViewModel;
 
 namespace RequestModel.Customers

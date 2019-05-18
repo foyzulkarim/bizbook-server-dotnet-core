@@ -13,19 +13,19 @@ namespace B2BCoreApi.Helpers
     public class Tokens
     {
         public static async Task<string> GenerateJwt(ClaimsIdentity identity, IJwtFactory jwtFactory,
-            JwtIssuerOptions jwtOptions, ApplicationUser user, EmployeeInfo employee, List<dynamic> roles, Shop shop,
+            JwtIssuerOptions jwtOptions, ApplicationUser user, Employee employee, List<dynamic> roles, Shop shop,
             JsonSerializerSettings serializerSettings, SecurityDbContext db)
         {
-            var firstOrDefault = roles.FirstOrDefault(x=>x.Name==user.RoleName);
+            var firstOrDefault = roles.FirstOrDefault(x => x.Name == user.RoleName);
             string roleId = firstOrDefault == null ? "" : firstOrDefault.Id;
             string id = identity.Claims.Single(c => c.Type == "id").Value;
             var name = user.FirstName + " " + user.LastName;
             string token = await jwtFactory.GenerateEncodedToken(user.UserName, identity);
-            string warehouseId = "";
-            if (employee != null)
-            {
-               warehouseId = !string.IsNullOrWhiteSpace(employee.WarehouseId) ? employee.WarehouseId : "";
-            }
+            //string warehouseId = "";
+            //if (employee != null)
+            //{
+            //    warehouseId = !string.IsNullOrWhiteSpace(employee.WarehouseId) ? employee.WarehouseId : "";
+            //}
 
             IQueryable<ApplicationPermission> permissions = db.Permissions.Where(x => x.RoleId == roleId && x.IsAllowed);
             var resources =
@@ -41,11 +41,10 @@ namespace B2BCoreApi.Helpers
                 role = user.RoleName,
                 roleId = roleId,
                 shopId = user.ShopId,
-                warehouseId = warehouseId,
                 resources = allowedResources,
                 access_token = token,
                 expires_in = (int)jwtOptions.ValidFor.TotalSeconds,
-                token_type="bearer"
+                token_type = "bearer"
             };
 
             return JsonConvert.SerializeObject(response, serializerSettings);

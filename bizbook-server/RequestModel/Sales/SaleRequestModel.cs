@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Model.Constants;
 using Model.Model;
+using Model.Model.Sales;
 using ViewModel;
 
 namespace RequestModel.Sales
@@ -11,7 +12,7 @@ namespace RequestModel.Sales
     public class SaleRequestModel : RequestModel<Sale>
     {
         public ReportTimeType TimeType { get; set; }
-        
+
         public SaleRequestModel(string keyword, string orderBy = "Modified", string isAscending = "False") : base(
             keyword, orderBy, isAscending)
         {
@@ -33,7 +34,6 @@ namespace RequestModel.Sales
 
         public string SalesmanId { get; set; }
 
-        public string WarehouseId { get; set; }
 
         public bool IsTaggedSale { get; set; }
 
@@ -60,7 +60,7 @@ namespace RequestModel.Sales
 
             if (this.OrderState != All)
             {
-                OrderState state = (OrderState) Enum.Parse(typeof(OrderState), this.OrderState);
+                OrderState state = (OrderState)Enum.Parse(typeof(OrderState), this.OrderState);
                 ExpressionObj = ExpressionObj.And(x => x.OrderState == state);
             }
 
@@ -99,18 +99,9 @@ namespace RequestModel.Sales
 
             if (SalesmanId.IdIsOk())
             {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.EmployeeInfoId == SalesmanId);
+                this.ExpressionObj = this.ExpressionObj.And(x => x.EmployeeId == SalesmanId);
             }
 
-            if (WarehouseId.IdIsOk())
-            {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.WarehouseId == WarehouseId);
-            }
-
-            if (WarehouseId == new Guid().ToString())
-            {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.WarehouseId == null);
-            }
 
 
             this.ExpressionObj = this.ExpressionObj.And(x => x.IsTaggedSale == IsTaggedSale);
@@ -128,7 +119,7 @@ namespace RequestModel.Sales
         public override IQueryable<Sale> IncludeParents(IQueryable<Sale> queryable)
         {
             return queryable.Include(x => x.Address).Include(x => x.Customer).Include(x => x.Dealer)
-                .Include(x => x.EmployeeInfo).Include(x => x.SaleDetails);
+                .Include(x => x.Employee).Include(x => x.SaleDetails);
         }
 
         public override Expression<Func<Sale, DropdownViewModel>> Dropdown()

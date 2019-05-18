@@ -5,7 +5,7 @@ using Model.Constants;
 
 namespace Model.Model
 {
-    public partial class Sms : ShopChild
+    public class Sms : ShopChild
     {
         [Column(TypeName = "varchar(128)")]
         public string Text { get; set; }

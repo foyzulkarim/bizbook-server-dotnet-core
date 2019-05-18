@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Model;
+using Model.Model.Products;
 using RequestModel.Products;
 using ServiceLibrary.Products;
 using ViewModel.Products;

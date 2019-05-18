@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Model;
 using RequestModel.Shops;
 using ViewModel.Shops;
-using M = Model.Model.Supplier;
+using M = Model.Model.Purchases.Supplier;
 
 namespace B2BCoreApi.Controllers.CommandControllers.Shops
 {

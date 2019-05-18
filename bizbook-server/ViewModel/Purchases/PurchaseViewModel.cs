@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model.Model;
+using Model.Model.Purchases;
 using ViewModel.Shops;
 using ViewModel.Transactions;
 

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Model;
+using Model.Model.Customers;
 using RequestModel.Customers;
 using ServiceLibrary.Customers;
 using ViewModel.Customers;

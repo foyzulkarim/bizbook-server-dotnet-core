@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Model.Model;
+using Model.Model.Sales;
 using ViewModel;
 
 namespace RequestModel.Sales
@@ -28,17 +29,10 @@ namespace RequestModel.Sales
                 ExpressionObj = ExpressionObj.And(x => x.ProductDetailId == ProductDetailId);
             }
 
-            if (WarehouseId.IdIsOk())
-            {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.WarehouseId == WarehouseId);
-            }
-
             ExpressionObj = ExpressionObj.And(x => x.ShopId == ShopId);
             ExpressionObj = ExpressionObj.And(GenerateBaseEntityExpression());
             return ExpressionObj;
         }
-
-        public string WarehouseId { get; set; }
 
         public override IQueryable<SaleDetail> IncludeParents(IQueryable<SaleDetail> queryable)
         {
@@ -47,7 +41,7 @@ namespace RequestModel.Sales
 
         public override Expression<Func<SaleDetail, DropdownViewModel>> Dropdown()
         {
-            return x => new DropdownViewModel() {Id = x.Id, Text = x.ProductDetail.Name};
+            return x => new DropdownViewModel() { Id = x.Id, Text = x.ProductDetail.Name };
         }
     }
 }

@@ -80,9 +80,9 @@ namespace B2BCoreApi.Controllers
                 return BadRequest("User is Deactivated");
             }
 
-            var employeeInfo = _db.EmployeeInfoes.FirstOrDefault(x => x.Email == user.Email && x.ShopId == shop.Id);
+            var employeeInfo = _db.Employees.FirstOrDefault(x => x.Email == user.Email && x.ShopId == shop.Id);
 
-            List<dynamic> roles = new List<dynamic> {};
+            List<dynamic> roles = new List<dynamic> { };
             foreach (var r in _securityDb.ApplicationRoles.Select(x => new { x.Id, x.Name }).ToList())
             {
                 roles.Add(r);
@@ -96,7 +96,7 @@ namespace B2BCoreApi.Controllers
                 employeeInfo,
                 roles,
                 shop,
-                new JsonSerializerSettings {Formatting = Formatting.Indented},
+                new JsonSerializerSettings { Formatting = Formatting.Indented },
                 _securityDb);
             return Ok(jwt);
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Model;
 using Rm = RequestModel.Products.ProductGroupRequestModel;
-using M = Model.Model.ProductGroup;
+using M = Model.Model.Products.ProductGroup;
 using Vm = ViewModel.Products.ProductGroupViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

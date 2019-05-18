@@ -53,13 +53,12 @@ namespace Model.Constants
     [JsonConverter(typeof(StringEnumConverter))]
     public enum TransactionMedium
     {
-        All = 0,
         Cash = 1,
         Card = 2,
         Cheque = 3,
         Mobile = 4,
-        Other = 5,
-        Bank = 6
+        Bank = 5,
+        Other = 6
     }
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Model.Constants;
 using Model.Model;
-using Model.Sales;
+using Model.Model.Sales;
 using Model.Shops;
 using ViewModel.Customers;
 using ViewModel.Shops;
@@ -35,8 +35,6 @@ namespace ViewModel.Sales
             CostAmount = x.CostAmount;
             ProfitAmount = x.ProfitAmount;
             ProfitPercent = x.ProfitPercent;
-            PaidByCashAmount = x.PaidByCashAmount;
-            PaidByOtherAmount = x.PaidByOtherAmount;
 
             #endregion
 
@@ -47,23 +45,14 @@ namespace ViewModel.Sales
             DeliverymanId = x.DeliverymanId;
             DeliverymanName = x.DeliverymanName;
             DeliverymanPhone = x.DeliverymanPhone;
-            CourierShopId = x.CourierShopId;
 
-            if (x.EstimatedDeliveryDate != null)
-            {
-                this.EstimatedDeliveryDate = x.EstimatedDeliveryDate.Value;
-            }
 
-            if (x.RequiredDeliveryDateByCustomer != null)
-                this.RequiredDeliveryDateByCustomer = x.RequiredDeliveryDateByCustomer.Value;
+            if (x.RequiredDeliveryDate != null)
+                this.RequiredDeliveryDateByCustomer = x.RequiredDeliveryDate.Value;
 
-            if (x.RequiredDeliveryTimeByCustomer != null)
-                this.RequiredDeliveryTimeByCustomer = x.RequiredDeliveryTimeByCustomer;
+            if (x.RequiredDeliveryTime != null)
+                this.RequiredDeliveryTimeByCustomer = x.RequiredDeliveryTime;
 
-            if (x.OrderDate != null)
-            {
-                this.OrderDate = x.OrderDate.Value;
-            }
 
             #endregion
 
@@ -86,8 +75,6 @@ namespace ViewModel.Sales
             CustomerName = x.CustomerName;
             CustomerPhone = x.CustomerPhone;
             CustomerNote = x.CustomerNote;
-            Guarantor1Id = x.Guarantor1Id;
-            Guarantor2Id = x.Guarantor2Id;
 
             #endregion
 
@@ -141,25 +128,16 @@ namespace ViewModel.Sales
             }
 
             Date = x.Modified.ToString("dd-MMM-yyyy");
-            EmployeeInfoId = x.EmployeeInfoId;
-            EmployeeInfoName = x.EmployeeInfoName;
+            EmployeeInfoId = x.EmployeeId;
+            EmployeeInfoName = x.EmployeeName;
 
-            if (x.EmployeeInfo != null)
+            if (x.Employee != null)
             {
-                EmployeeInfo = x.EmployeeInfo;
+                Employee = x.Employee;
             }
 
-            WarehouseId = x.WarehouseId;
-            if (x.Warehouse != null)
-            {
-                Warehouse = x.Warehouse;
-            }
 
-            InstallmentId = x.InstallmentId;
-            if (x.Installment != null)
-            {
-                Installment = new InstallmentViewModel(x.Installment);
-            }
+
         }
 
         public string InstallmentId { get; set; }
@@ -283,10 +261,8 @@ namespace ViewModel.Sales
         public string Date { get; set; }
         public string EmployeeInfoId { get; set; }
         [IsViewable] public string EmployeeInfoName { get; set; }
-        public virtual EmployeeInfo EmployeeInfo { get; set; }
+        public virtual Employee Employee { get; set; }
 
         public string WarehouseId { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
-        public InstallmentViewModel Installment { get; private set; }
     }
 }

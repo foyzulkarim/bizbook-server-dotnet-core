@@ -1,4 +1,5 @@
 using Model.Model;
+using Model.Model.Transactions;
 
 namespace ViewModel.Sales
 {

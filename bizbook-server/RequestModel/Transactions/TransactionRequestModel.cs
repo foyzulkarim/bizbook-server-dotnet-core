@@ -1,4 +1,5 @@
 ﻿using Model.Model;
+using Model.Model.Transactions;
 using ViewModel;
 
 namespace RequestModel.Transactions
@@ -10,7 +11,7 @@ namespace RequestModel.Transactions
     {
         public string AccountHeadId { get; set; }
 
-        public string AccountInfoId { get; set; }
+        public string WalletId { get; set; }
 
         public TransactionRequestModel(string keyword, string orderBy, string isAscending) : base(keyword, orderBy,
             isAscending)
@@ -23,8 +24,7 @@ namespace RequestModel.Transactions
             {
                 ExpressionObj =
                     x =>
-                        x.OrderNumber.ToLower().Contains(Keyword) || x.TransactionNumber.ToLower().Contains(Keyword) ||
-                        x.AccountHeadName.ToString().ToLower().Contains(Keyword);
+                        x.OrderNumber.ToLower().Contains(Keyword) || x.TransactionNumber.ToLower().Contains(Keyword);
             }
 
             if (!string.IsNullOrWhiteSpace(AccountHeadId))
@@ -32,9 +32,9 @@ namespace RequestModel.Transactions
                 ExpressionObj = ExpressionObj.And(x => x.AccountHeadId == AccountHeadId);
             }
 
-            if (!string.IsNullOrWhiteSpace(AccountInfoId))
+            if (!string.IsNullOrWhiteSpace(WalletId))
             {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.AccountInfoId == AccountInfoId);
+                this.ExpressionObj = this.ExpressionObj.And(x => x.WalletId == WalletId);
             }
 
             if (!string.IsNullOrWhiteSpace(ParentId))
@@ -49,7 +49,7 @@ namespace RequestModel.Transactions
 
         public override Expression<Func<Transaction, DropdownViewModel>> Dropdown()
         {
-            return x => new DropdownViewModel() {Id = x.Id, Text = x.OrderNumber};
+            return x => new DropdownViewModel() { Id = x.Id, Text = x.OrderNumber };
         }
     }
 }

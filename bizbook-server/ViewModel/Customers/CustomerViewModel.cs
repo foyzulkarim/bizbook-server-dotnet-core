@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Model.Model;
+using Model.Model.Customers;
 
 namespace ViewModel.Customers
 {

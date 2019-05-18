@@ -11,7 +11,7 @@ using ServiceLibrary.Shops;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Rm = RequestModel.Shops.BrandRequestModel;
-using M = Model.Model.Brand;
+using M = Model.Model.Products.Brand;
 using Vm = ViewModel.Shops.BrandViewModel;
 using Microsoft.Extensions.Logging;
 

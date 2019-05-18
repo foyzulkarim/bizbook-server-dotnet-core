@@ -1,4 +1,5 @@
 ﻿using Model.Model;
+using Model.Model.Products;
 
 namespace ViewModel.Products
 {
@@ -13,15 +14,14 @@ namespace ViewModel.Products
         {
             Name = x.Name;
             Model = x.Model;
-            Year = x.Year;
+
             BarCode = x.BarCode;
             ProductCode = x.ProductCode;
             HasUniqueSerial = x.HasUniqueSerial;
             HasWarrenty = x.HasWarrenty;
             SalePrice = x.SalePrice;
             CostPrice = x.CostPrice;
-            Type = x.Type;
-            Color = x.Color;
+
             MinimumStockToNotify = x.MinimumStockToNotify;
             StartingInventory = x.StartingInventory;
             Purchased = x.Purchased;
@@ -43,12 +43,6 @@ namespace ViewModel.Products
             ShopId = x.ShopId;
             DealerPrice = x.DealerPrice;
 
-            WcId = x.WcId;
-            WcCategoryId = x.WcCategoryId;
-            WcType = x.WcType;
-            WcVariationId = x.WcVariationId;
-            WcVariationOption = x.WcVariationOption;
-            WcVariationPermalink = x.WcVariationPermalink;
         }
 
         public int WcId { get; set; }

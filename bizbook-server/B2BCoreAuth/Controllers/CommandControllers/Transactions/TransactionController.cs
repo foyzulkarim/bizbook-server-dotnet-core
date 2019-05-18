@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Model;
+using Model.Model.Transactions;
 using RequestModel.Transactions;
 using ViewModel.Transactions;
 using TransactionService = ServiceLibrary.Transactions.TransactionService;

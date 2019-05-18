@@ -6,7 +6,7 @@ using B2BCoreApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.Model;
-using ServiceLibrary.Sales;
+//using ServiceLibrary.Sales;
 
 namespace B2BCoreApi.Controllers.QueryControllers
 {
@@ -21,7 +21,7 @@ namespace B2BCoreApi.Controllers.QueryControllers
         public DashboardQueryController(BizBookInventoryContext db)
         {
             this.db = db;
-            
+
         }
 
         [HttpGet]
@@ -29,18 +29,18 @@ namespace B2BCoreApi.Controllers.QueryControllers
         [ActionName("Data")]
         public async Task<IActionResult> Data()
         {
-            AppUser = Request.HttpContext.Items["AppUser"] as ApplicationUser;
-            string shopId = AppUser.ShopId;
+            //AppUser = Request.HttpContext.Items["AppUser"] as ApplicationUser;
+            //string shopId = AppUser.ShopId;
 
-            SaleService saleService=new SaleService(new BaseRepository<Sale>(db));
-            dynamic sales = await saleService.GetSalesAmounts(shopId);
-            
-            var data = new
-            {
-                Sales = sales            
-            };
+            //SaleService saleService=new SaleService(new BaseRepository<Sale>(db));
+            //dynamic sales = await saleService.GetSalesAmounts(shopId);
 
-            return Ok(data);
+            //var data = new
+            //{
+            //    Sales = sales            
+            //};
+
+            return Ok();
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Model;
+using Model.Model.Sales;
 using RequestModel.Shops;
 using ViewModel.Shops;
 

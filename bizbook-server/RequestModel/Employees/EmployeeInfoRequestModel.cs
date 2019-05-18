@@ -5,7 +5,7 @@ using ViewModel;
 
 namespace RequestModel.Employees
 {
-    public class EmployeeInfoRequestModel : RequestModel<EmployeeInfo>
+    public class EmployeeInfoRequestModel : RequestModel<Employee>
     {
         public EmployeeInfoRequestModel(string keyword, string orderBy = "Modified", string isAscending = "False") :
             base(keyword, orderBy, isAscending)
@@ -18,7 +18,7 @@ namespace RequestModel.Employees
 
         public string WarehouseId { get; set; }
 
-        protected override Expression<Func<EmployeeInfo, bool>> GetExpression()
+        protected override Expression<Func<Employee, bool>> GetExpression()
         {
             if (!string.IsNullOrWhiteSpace(Keyword))
             {
@@ -32,10 +32,10 @@ namespace RequestModel.Employees
                 this.ExpressionObj = this.ExpressionObj.And(x => x.RoleId == RoleId);
             }
 
-            if (WarehouseId.IdIsOk())
-            {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.WarehouseId == WarehouseId);
-            }
+            //if (WarehouseId.IdIsOk())
+            //{
+            //    this.ExpressionObj = this.ExpressionObj.And(x => x.WarehouseId == WarehouseId);
+            //}
 
             if (IsEmployeeActive)
             {
@@ -47,9 +47,9 @@ namespace RequestModel.Employees
             return ExpressionObj;
         }
 
-        public override Expression<Func<EmployeeInfo, DropdownViewModel>> Dropdown()
+        public override Expression<Func<Employee, DropdownViewModel>> Dropdown()
         {
-            return x => new DropdownViewModel() {Id = x.Id, Text = x.Name};
+            return x => new DropdownViewModel() { Id = x.Id, Text = x.Name };
         }
     }
 }

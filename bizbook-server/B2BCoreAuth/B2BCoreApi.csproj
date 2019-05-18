@@ -6,20 +6,36 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\CommandControllers\Customers\CustomerAddressController.cs" />
+    <Compile Remove="Controllers\CommandControllers\Purchase\PurchaseController.cs" />
+    <Compile Remove="Controllers\CommandControllers\Sales\SaleController.cs" />
+    <Compile Remove="Controllers\CommandControllers\Warehouses\DamageController.cs" />
+    <Compile Remove="Controllers\CommandControllers\Warehouses\StockTransferController.cs" />
+    <Compile Remove="Controllers\CommandControllers\Warehouses\WarehouseController.cs" />
     <Compile Remove="Controllers\QueryControllers\Customers\CustomerAddressQueryController.cs" />
+    <Compile Remove="Controllers\QueryControllers\Purchase\PurchaseQueryController.cs" />
+    <Compile Remove="Controllers\QueryControllers\Sales\SaleQueryController.cs" />
+    <Compile Remove="Controllers\QueryControllers\Warehouses\DamageQueryController.cs" />
+    <Compile Remove="Controllers\QueryControllers\Warehouses\StockTransferQueryController.cs" />
+    <Compile Remove="Controllers\QueryControllers\Warehouses\WarehouseQueryController.cs" />
     <Compile Remove="Migrations\20180327115510_UserInit.cs" />
     <Compile Remove="Migrations\20180327115510_UserInit.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\CommandControllers\Purchase\" />
+    <Folder Include="Controllers\CommandControllers\Sales\" />
+    <Folder Include="Controllers\CommandControllers\Warehouses\" />
+    <Folder Include="Controllers\QueryControllers\Purchase\" />
+    <Folder Include="Controllers\QueryControllers\Sales\" />
+    <Folder Include="Controllers\QueryControllers\Warehouses\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview5.19227.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview5.19227.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0-preview5.19227.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

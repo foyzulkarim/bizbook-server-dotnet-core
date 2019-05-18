@@ -5,6 +5,7 @@ using System.Text;
 using B2BCoreApi.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.Model;
+using Model.Model.Products;
 using RestSharp;
 using Shouldly;
 

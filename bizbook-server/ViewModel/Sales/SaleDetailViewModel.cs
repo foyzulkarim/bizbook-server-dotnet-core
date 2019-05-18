@@ -1,4 +1,6 @@
 using Model.Model;
+using Model.Model.Sales;
+using Model.Model.Transactions;
 
 namespace ViewModel.Sales
 {
@@ -85,7 +87,6 @@ namespace ViewModel.Sales
     {
         public SaleTransactionViewModel(Transaction x) : base(x)
         {
-            TransactionService = x.TransactionMediumName;
             TransactionNumber = x.TransactionNumber;
             Amount = x.Amount;
             Created = x.Created;
@@ -95,6 +96,6 @@ namespace ViewModel.Sales
         public double Amount { get; set; }
         public string ContactPersonName { get; set; }
         public string TransactionNumber { get; set; }
-        public string TransactionService { get; set; }
+
     }
 }

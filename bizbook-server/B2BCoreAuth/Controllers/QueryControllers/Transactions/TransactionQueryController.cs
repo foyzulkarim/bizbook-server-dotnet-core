@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Model;
-
+using Model.Model.Transactions;
 using RequestModel.Transactions;
 using ServiceLibrary.Transactions;
 using ViewModel.Transactions;

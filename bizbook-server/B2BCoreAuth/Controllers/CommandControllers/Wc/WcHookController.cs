@@ -1,33 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-//using CommonLibrary.Repository;
-using Model;
-using Model.Model;
-using Model.Sales;
-using ServiceLibrary.Products;
-using ServiceLibrary.Sales;
+﻿//using CommonLibrary.Repository;
+
+//using ServiceLibrary.Sales;
 //using WcConverter;
 //using WcModel;
 
-namespace Server.Inventory.Controllers.CommandControllers.Wc
+namespace B2BCoreApi.Controllers.CommandControllers.Wc
 {
-    using System.IO;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Threading.Tasks;
-
     //using Microsoft.AspNet.SignalR;
-
-    using Model.Shops;
-
-    using Newtonsoft.Json;
-
-    using Serilog;
 
     //using Server.Inventory.Attributes;
     //using Server.Inventory.Helpers;

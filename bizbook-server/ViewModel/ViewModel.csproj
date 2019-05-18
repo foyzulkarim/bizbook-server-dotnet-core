@@ -10,6 +10,10 @@
     <Compile Remove="Reports\ProductReportViewModel.cs" />
     <Compile Remove="Reports\SaleReportGridModel.cs" />
     <Compile Remove="Reports\SaleReportViewModel.cs" />
+    <Compile Remove="Warehouses\DamageViewModel.cs" />
+    <Compile Remove="Warehouses\StockTransferDetailViewModel.cs" />
+    <Compile Remove="Warehouses\StockTransferViewModel.cs" />
+    <Compile Remove="Warehouses\WarehouseViewModel.cs" />
   </ItemGroup>
 
   <ItemGroup>

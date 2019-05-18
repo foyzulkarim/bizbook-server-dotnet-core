@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Model.Model;
+using Model.Model.Customers;
 using ViewModel;
 
 namespace RequestModel.Customers

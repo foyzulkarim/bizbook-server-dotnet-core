@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Model;
+using Model.Model.Products;
 using RequestModel.Shops;
 using ServiceLibrary.Shops;
 using ViewModel.Shops;

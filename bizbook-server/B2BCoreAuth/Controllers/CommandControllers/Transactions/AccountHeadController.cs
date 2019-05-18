@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using Model;
+using Model.Model.Transactions;
 using RequestModel.Transactions;
 using ViewModel.Transactions;
 

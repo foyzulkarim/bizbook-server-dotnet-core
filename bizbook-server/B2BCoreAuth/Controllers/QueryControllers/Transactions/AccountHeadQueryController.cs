@@ -10,7 +10,7 @@ using System.Web.Http;
 using Model;
 using ViewModel.Transactions;
 using Rm = RequestModel.Transactions.AccountHeadRequestModel;
-using M = Model.Model.AccountHead;
+using M = Model.Model.Transactions.AccountHead;
 using Vm = ViewModel.Transactions.AccountHeadViewModel;
 
 namespace B2BCoreApi.Controllers.QueryControllers.Transactions

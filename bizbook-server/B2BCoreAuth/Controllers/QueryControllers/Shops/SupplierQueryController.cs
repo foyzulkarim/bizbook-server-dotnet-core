@@ -12,7 +12,7 @@ using ServiceLibrary.Shops;
 using ViewModel.History;
 using ViewModel.Shops;
 using Rm = RequestModel.Shops.SupplierRequestModel;
-using M = Model.Model.Supplier;
+using M = Model.Model.Purchases.Supplier;
 using Vm = ViewModel.Shops.SupplierViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

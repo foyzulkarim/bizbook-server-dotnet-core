@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Model;
 using Model.Model;
+using Model.Model.Sales;
 using RequestModel.Shops;
 using ViewModel.Shops;
 

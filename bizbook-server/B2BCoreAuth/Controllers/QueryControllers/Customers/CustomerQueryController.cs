@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using Model;
 using ServiceLibrary.Customers;
 using Rm = RequestModel.Customers.CustomerRequestModel;
-using M = Model.Model.Customer;
+using M = Model.Model.Customers.Customer;
 using Vm = ViewModel.Customers.CustomerViewModel;
 
 namespace B2BCoreApi.Controllers.QueryControllers.Customers

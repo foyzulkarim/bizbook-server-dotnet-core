@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Products\SupplierProductService.cs" />
+    <Compile Remove="Purchases\PurchaseService.cs" />
     <Compile Remove="Reports\AccountReportService2.cs" />
     <Compile Remove="Reports\BaseReportService.cs" />
     <Compile Remove="Reports\BaseReportService1.cs" />
@@ -15,7 +17,10 @@
     <Compile Remove="Reports\SchedulerService.cs" />
     <Compile Remove="Reports\TransactionReportService.cs" />
     <Compile Remove="Sales\SaleDetailService.cs" />
+    <Compile Remove="Sales\SaleService.cs" />
     <Compile Remove="Subscription\HardwareInfo.cs" />
+    <Compile Remove="Warehouses\StockTransferService.cs" />
+    <Compile Remove="Warehouses\WarehouseService.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +36,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Purchases\" />
     <Folder Include="Reports\" />
+    <Folder Include="Sales\" />
+    <Folder Include="Warehouses\" />
   </ItemGroup>
 
 </Project>

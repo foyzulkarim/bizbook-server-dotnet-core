@@ -25,7 +25,7 @@ using RequestModel.Reports;
 using RequestModel.Sales;
 using RequestModel.Shops;
 using RequestModel.Transactions;
-using RequestModel.Warehouses;
+
 using Serilog;
 using Serilog.Core;
 using ServiceLibrary;
@@ -122,37 +122,27 @@ namespace B2BCoreApi
             var customersBinder = new AbstractModelBinderProvider<CustomerRequestModel>();
             var employeeInfoBinder = new AbstractModelBinderProvider<EmployeeInfoRequestModel>();
             var brandBinder = new AbstractModelBinderProvider<BrandRequestModel>();
-            var courierBinder = new AbstractModelBinderProvider<CourierRequestModel>();
             var dealerBinder = new AbstractModelBinderProvider<DealerRequestModel>();
             var shopBinder = new AbstractModelBinderProvider<ShopRequestModel>();
             var supplierBinder = new AbstractModelBinderProvider<SupplierRequestModel>();
-            var dealerProductBinder = new AbstractModelBinderProvider<DealerProductRequestModel>();
             var productCategoryBinder = new AbstractModelBinderProvider<ProductCategoryRequestModel>();
             var productDetailBinder = new AbstractModelBinderProvider<ProductDetailRequestModel>();
             var productGroupBinder = new AbstractModelBinderProvider<ProductGroupRequestModel>();
-            var productSerialBinder = new AbstractModelBinderProvider<ProductSerialRequestModel>();
-            var supplierProductBinder = new AbstractModelBinderProvider<SupplierProductRequestModel>();
             var purchaseDetailBinder = new AbstractModelBinderProvider<PurchaseDetailRequestModel>();
             var purchaseBinder = new AbstractModelBinderProvider<PurchaseRequestModel>();
             var customerBySaleBinder = new AbstractModelBinderProvider<CustomerBySaleRequestModel>();
             var dailySalesOverviewBinder = new AbstractModelBinderProvider<DailySalesOverviewRequestModel>();
             var salesByProductBinder = new AbstractModelBinderProvider<SalesByProductRequestModel>();
-            var courierOrderBinder = new AbstractModelBinderProvider<CourierOrderRequestModel>();
-            var installmentDetailtBinder = new AbstractModelBinderProvider<InstallmentDetailRequestModel>();
-            var installmentBinder = new AbstractModelBinderProvider<InstallmentRequestModel>();
+
+
             var saleDetailBinder = new AbstractModelBinderProvider<SaleDetailRequestModel>();
             var accountHeadBinder = new AbstractModelBinderProvider<AccountHeadRequestModel>();
-            var accountInfoBinder = new AbstractModelBinderProvider<AccountInfoRequestModel>();
+
             var transactionBinder = new AbstractModelBinderProvider<TransactionRequestModel>();
-            var damageBinder = new AbstractModelBinderProvider<DamageRequestModel>();
-            var stockTransferDetailBinder = new AbstractModelBinderProvider<StockTransferDetailRequestModel>();
-            var stockTransferBinder = new AbstractModelBinderProvider<StockTransferRequestModel>();
-            var warehouseHistoryBinder = new AbstractModelBinderProvider<WarehouseHistoryRequestModel>();
-            var warehouseBinder = new AbstractModelBinderProvider<WarehouseRequestModel>();
-            var hookDetailBinder = new AbstractModelBinderProvider<HookDetailRequestModel>();
+
             var messageBinder = new AbstractModelBinderProvider<MessageRequestModel>();
             var smsHistoryBinder = new AbstractModelBinderProvider<SmsHistoryRequestModel>();
-            var smsHookBinder = new AbstractModelBinderProvider<SmsHookRequestModel>();
+
             var smsBinder = new AbstractModelBinderProvider<SmsRequestModel>();
 
             services.AddMvc(options =>
@@ -165,37 +155,29 @@ namespace B2BCoreApi
                 options.ModelBinderProviders.Insert(2, customersBinder);
                 options.ModelBinderProviders.Insert(3, employeeInfoBinder);
                 options.ModelBinderProviders.Insert(4, brandBinder);
-                options.ModelBinderProviders.Insert(5, courierBinder);
+
                 options.ModelBinderProviders.Insert(6, dealerBinder);
                 options.ModelBinderProviders.Insert(7, shopBinder);
                 options.ModelBinderProviders.Insert(8, supplierBinder);
-                options.ModelBinderProviders.Insert(9, dealerProductBinder);
+
                 options.ModelBinderProviders.Insert(10, productCategoryBinder);
                 options.ModelBinderProviders.Insert(11, productDetailBinder);
                 options.ModelBinderProviders.Insert(12, productGroupBinder);
-                options.ModelBinderProviders.Insert(13, productSerialBinder);
-                options.ModelBinderProviders.Insert(14, supplierProductBinder);
+
                 options.ModelBinderProviders.Insert(15, purchaseDetailBinder);
                 options.ModelBinderProviders.Insert(16, purchaseBinder);
                 options.ModelBinderProviders.Insert(17, customerBySaleBinder);
                 options.ModelBinderProviders.Insert(18, dailySalesOverviewBinder);
                 options.ModelBinderProviders.Insert(19, salesByProductBinder);
-                options.ModelBinderProviders.Insert(20, courierOrderBinder);
-                options.ModelBinderProviders.Insert(21, installmentDetailtBinder);
-                options.ModelBinderProviders.Insert(22, installmentBinder);
+
                 options.ModelBinderProviders.Insert(23, saleDetailBinder);
                 options.ModelBinderProviders.Insert(24, accountHeadBinder);
-                options.ModelBinderProviders.Insert(25, accountInfoBinder);
+
                 options.ModelBinderProviders.Insert(26, transactionBinder);
-                options.ModelBinderProviders.Insert(27, damageBinder);
-                options.ModelBinderProviders.Insert(28, stockTransferDetailBinder);
-                options.ModelBinderProviders.Insert(29, stockTransferBinder);
-                options.ModelBinderProviders.Insert(30, warehouseHistoryBinder);
-                options.ModelBinderProviders.Insert(31, warehouseBinder);
-                options.ModelBinderProviders.Insert(32, hookDetailBinder);
+
                 options.ModelBinderProviders.Insert(33, messageBinder);
                 options.ModelBinderProviders.Insert(34, smsHistoryBinder);
-                options.ModelBinderProviders.Insert(35, smsHookBinder);
+
                 options.ModelBinderProviders.Insert(36, smsBinder);
             });
         }

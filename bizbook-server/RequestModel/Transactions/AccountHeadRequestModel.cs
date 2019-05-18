@@ -1,4 +1,5 @@
 ﻿using Model.Model;
+using Model.Model.Transactions;
 using ViewModel;
 
 namespace RequestModel.Transactions

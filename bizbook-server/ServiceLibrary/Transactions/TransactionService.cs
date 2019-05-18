@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Model;
 using Model.Constants;
 using Model.Model;
-using M = Model.Model.Transaction;
-using Repo = Model.BaseRepository<Model.Model.Transaction>;
+using M = Model.Model.Transactions.Transaction;
+using Repo = Model.BaseRepository<Model.Model.Transactions.Transaction>;
 using Rm = RequestModel.Transactions.TransactionRequestModel;
 using Vm = ViewModel.Transactions.TransactionViewModel;
 
@@ -12,15 +12,15 @@ namespace ServiceLibrary.Transactions
 {
     using System.Transactions;
     using ServiceLibrary.Customers;
-   
+
     public class TransactionService : BaseService<M, Rm, Vm>
     {
-      //  private AccountReportService2 accountReportService;
+        //  private AccountReportService2 accountReportService;
 
         private BizBookInventoryContext db;
         public TransactionService(Repo repository) : base(repository)
         {
-        //    this.accountReportService = new AccountReportService2();
+            //    this.accountReportService = new AccountReportService2();
             db = Repository.Db as BizBookInventoryContext;
         }
 
@@ -38,7 +38,7 @@ namespace ServiceLibrary.Transactions
                 scope.Complete();
             }
 
-          //  this.accountReportService.QuickUpdate(entity.ShopId, entity.AccountHeadId, entity.Created);
+            //  this.accountReportService.QuickUpdate(entity.ShopId, entity.AccountHeadId, entity.Created);
             return true;
         }
 
@@ -56,7 +56,7 @@ namespace ServiceLibrary.Transactions
                 scope.Complete();
             }
 
-           // this.accountReportService.QuickUpdate(entity.ShopId, entity.AccountHeadId, entity.Created);
+            // this.accountReportService.QuickUpdate(entity.ShopId, entity.AccountHeadId, entity.Created);
             return true;
         }
 
@@ -77,59 +77,59 @@ namespace ServiceLibrary.Transactions
 
         private void UpdatePurchaseRelatedTables(M entity)
         {
-            Purchase purchase = db.Purchases.FirstOrDefault(p => p.Id == entity.OrderId);
-            if (purchase != null)
-            {
-                purchase.PaidAmount = purchase.PaidAmount + entity.Amount;
-                purchase.DueAmount = purchase.TotalAmount - purchase.PaidAmount;
-            }
+            //Purchase purchase = db.Purchases.FirstOrDefault(p => p.Id == entity.OrderId);
+            //if (purchase != null)
+            //{
+            //    purchase.PaidAmount = purchase.PaidAmount + entity.Amount;
+            //    purchase.DueAmount = purchase.TotalAmount - purchase.PaidAmount;
+            //}
         }
 
         private void UpdateSaleRelatedTables(M entity)
         {
-            var sale = db.Sales.FirstOrDefault(item => item.Id == entity.OrderId);
-            if (sale != null)
-            {
-                IQueryable<M> transactions = this.Repository.Get()
-                    .Where(x => x.OrderId == entity.OrderId);
-                double paidTotal = 0;
-                var incomes = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Income)
-                    .Select(x => x.Amount);
-                if (incomes.Any())
-                {
-                    paidTotal = incomes.Sum();
-                }
+            //var sale = db.Sales.FirstOrDefault(item => item.Id == entity.OrderId);
+            //if (sale != null)
+            //{
+            //    IQueryable<M> transactions = this.Repository.Get()
+            //        .Where(x => x.OrderId == entity.OrderId);
+            //    double paidTotal = 0;
+            //    var incomes = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Income)
+            //        .Select(x => x.Amount);
+            //    if (incomes.Any())
+            //    {
+            //        paidTotal = incomes.Sum();
+            //    }
 
-                double returnedTotal = 0;
-                var expenses = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Expense)
-                    .Select(x => x.Amount);
-                if (expenses.Any())
-                {
-                    returnedTotal = expenses.Sum();
-                }
+            //    double returnedTotal = 0;
+            //    var expenses = transactions.Where(x => x.TransactionFlowType == TransactionFlowType.Expense)
+            //        .Select(x => x.Amount);
+            //    if (expenses.Any())
+            //    {
+            //        returnedTotal = expenses.Sum();
+            //    }
 
-                sale.PaidAmount = paidTotal - returnedTotal;
+            //    sale.PaidAmount = paidTotal - returnedTotal;
 
-                sale.DueAmount = sale.PayableTotalAmount - sale.PaidAmount;
+            //    sale.DueAmount = sale.PayableTotalAmount - sale.PaidAmount;
 
-                if (sale.DueAmount == 0)
-                {
-                    IQueryable<SaleDetail> saleDetails = this.db.SaleDetails.Where(x => x.SaleId == sale.Id);
-                    foreach (var detail in saleDetails)
-                    {
-                        detail.PaidAmount = detail.Total;
-                        detail.DueAmount = 0;
-                    }
-                }
+            //    if (sale.DueAmount == 0)
+            //    {
+            //        IQueryable<SaleDetail> saleDetails = this.db.SaleDetails.Where(x => x.SaleId == sale.Id);
+            //        foreach (var detail in saleDetails)
+            //        {
+            //            detail.PaidAmount = detail.Total;
+            //            detail.DueAmount = 0;
+            //        }
+            //    }
 
-                this.db.SaveChanges();
-            }
+            //    this.db.SaveChanges();
+            //}
 
-            if (!sale.IsDealerSale)
-            {
-                CustomerService customerService = new CustomerService(new BaseRepository<Customer>(this.db));
-                customerService.UpdatePoint(sale.CustomerId);
-            }
+            //if (!sale.IsDealerSale)
+            //{
+            //    CustomerService customerService = new CustomerService(new BaseRepository<Customer>(this.db));
+            //    customerService.UpdatePoint(sale.CustomerId);
+            //}
         }
     }
 }

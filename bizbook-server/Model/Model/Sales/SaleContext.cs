@@ -1,7 +1,7 @@
 ﻿using System;
 using Model.Constants;
 
-namespace Model.Sales
+namespace Model.Model.Sales
 {
     public abstract class SaleOrderState
     {

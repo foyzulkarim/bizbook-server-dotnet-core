@@ -63,7 +63,7 @@ namespace B2BCoreApi.Controllers.CommandControllers.Shops
                 return Ok();
             }
         }
-        
+
         [Authorize(Roles = "SuperAdmin")]
         [HttpPut]
         [Route("Edit")]
@@ -111,9 +111,9 @@ namespace B2BCoreApi.Controllers.CommandControllers.Shops
                 return result;
             }
         }
-        
+
         private async Task AddUser(M model)
-        {            
+        {
             var shopName = Regex.Replace(model.Name.ToLower(), "[^a-zA-Z0-9]", string.Empty);
             string userName = "admin@" + shopName + "." + "bizbook.co";
             var user = new ApplicationUser
@@ -141,28 +141,28 @@ namespace B2BCoreApi.Controllers.CommandControllers.Shops
         }
 
         private void AddAccountHeads(M model)
-        {            
+        {
             var shopId = model.Id;
-            BusinessSeedData.AddAccountHeads(db, shopId);
-            BusinessSeedData.AddAccountInfo(db,shopId);
+            // BusinessSeedData.AddAccountHeads(db, shopId);
+            // BusinessSeedData.AddAccountInfo(db,shopId);
         }
 
         private void AddBrand(M model)
-        {            
+        {
             var shopId = model.Id;
-            BusinessSeedData.AddBrand(shopId, db, model.Name);
+            //  BusinessSeedData.AddBrand(shopId, db, model.Name);
         }
 
         private void AddSupplier(M model)
         {
             var shopId = model.Id;
-            BusinessSeedData.AddSupplier(shopId, db, model.Name);
+            //BusinessSeedData.AddSupplier(shopId, db, model.Name);
         }
 
         private void AddProduct(M model)
         {
             var shopId = model.Id;
-            BusinessSeedData.AddProducts(db, shopId);
+            //BusinessSeedData.AddProducts(db, shopId);
         }
     }
 }

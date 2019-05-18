@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Model.Model;
+using Model.Model.Purchases;
 using ViewModel;
 
 namespace RequestModel.Purchases
@@ -33,10 +34,7 @@ namespace RequestModel.Purchases
                 ExpressionObj = ExpressionObj.And(x => x.ProductDetailId == ProductDetailId);
             }
 
-            if (WarehouseId.IdIsOk())
-            {
-                this.ExpressionObj = this.ExpressionObj.And(x => x.WarehouseId == WarehouseId);
-            }
+
 
             ExpressionObj = ExpressionObj.And(x => x.ShopId == ShopId);
             ExpressionObj = ExpressionObj.And(GenerateBaseEntityExpression());
@@ -52,7 +50,7 @@ namespace RequestModel.Purchases
 
         public override Expression<Func<PurchaseDetail, DropdownViewModel>> Dropdown()
         {
-            return x => new DropdownViewModel() {Id = x.Id, Text = x.ProductDetail.Name};
+            return x => new DropdownViewModel() { Id = x.Id, Text = x.ProductDetail.Name };
         }
     }
 }

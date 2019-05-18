@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Model.Model;
+using Model.Model.Sales;
 using RequestModel;
 using RequestModel.Sales;
 

@@ -14,9 +14,9 @@ using Microsoft.Extensions.Logging;
 namespace B2BCoreApi.Controllers.QueryControllers.Employees
 {
     [Route("api/EmployeeInfoQuery")]
-    public class EmployeeInfoQueryController : BaseQueryController<EmployeeInfo, EmployeeInfoRequestModel, EmployeeInfoViewModel>
+    public class EmployeeInfoQueryController : BaseQueryController<Employee, EmployeeInfoRequestModel, EmployeeViewModel>
     {
-        public EmployeeInfoQueryController(BizBookInventoryContext db, ILogger<EmployeeInfoQueryController> logger) : base(new ServiceLibrary.BaseService<EmployeeInfo, EmployeeInfoRequestModel, EmployeeInfoViewModel>(new BaseRepository<EmployeeInfo>(db)), logger)
+        public EmployeeInfoQueryController(BizBookInventoryContext db, ILogger<EmployeeInfoQueryController> logger) : base(new ServiceLibrary.BaseService<Employee, EmployeeInfoRequestModel, EmployeeViewModel>(new BaseRepository<Employee>(db)), logger)
         {
 
         }

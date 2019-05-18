@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Model;
 using Model.Model;
-
+using Model.Model.Products;
 using ServiceLibrary.Products;
 
 using Rm = RequestModel.Products.ProductDetailRequestModel;

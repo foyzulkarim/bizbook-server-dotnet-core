@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Model.Model;
+using Model.Model.Products;
 using ViewModel;
 
 

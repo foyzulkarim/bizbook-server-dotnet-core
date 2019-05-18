@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Model.Constants;
 using Model.Model;
+using Model.Model.Sales;
 using Newtonsoft.Json;
 using RequestModel.Message;
 using ViewModel.Message;
@@ -21,10 +22,11 @@ namespace ServiceLibrary.Messages
 
         public bool HasBalance(string shopId)
         {
-            BizBookInventoryContext db = this.Repository.Db as BizBookInventoryContext;
-            var histories = db.SmsHistories.Where(x => x.ShopId == shopId);
-            double sum = histories.Any() ? histories.Sum(x => x.Amount) : 0;
-            return sum > 0;
+            //BizBookInventoryContext db = this.Repository.Db as BizBookInventoryContext;
+            //var histories = db.SmsHistories.Where(x => x.ShopId == shopId);
+            //double sum = histories.Any() ? histories.Sum(x => x.Amount) : 0;
+            //return sum > 0;
+            return false;
         }
 
         public bool UpdateBalance(string shopId, string smsId, double amount, string text)
@@ -44,9 +46,10 @@ namespace ServiceLibrary.Messages
                 Text = text,
                 SmsId = smsId
             };
-            var history = db.SmsHistories.Add(entity);
-            int i = db.SaveChanges();
-            return i > 0;
+            //var history = db.SmsHistories.Add(entity);
+            //int i = db.SaveChanges();
+            //return i > 0;
+            return false;
         }
 
         public bool SendSms(Sale sale, ShopViewModel shop, string apiUrl)

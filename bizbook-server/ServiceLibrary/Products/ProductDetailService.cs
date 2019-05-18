@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using RequestModel.Sales;
 using ViewModel.Sales;
-using BaseRepo = Model.BaseRepository<Model.Model.ProductDetail>;
+using BaseRepo = Model.BaseRepository<Model.Model.Products.ProductDetail>;
 using Rm = RequestModel.Products.ProductDetailRequestModel;
 using Vm = ViewModel.Products.ProductDetailViewModel;
 using System;
@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Model;
 using Model.Model;
+using Model.Model.Products;
+using Model.Model.Purchases;
+using Model.Model.Sales;
 using Model.Shops;
 using Newtonsoft.Json;
 using ViewModel.History;
@@ -91,7 +94,6 @@ namespace ServiceLibrary.Products
                 ProductDetailId = rm.ParentId,
                 Page = rm.Page,
                 IsIncludeParents = true,
-                WarehouseId = rm.WarehouseId,
                 PerPageCount = rm.PerPageCount,
             };
             // this will pull all data
@@ -118,37 +120,37 @@ namespace ServiceLibrary.Products
             return new Tuple<Vm, List<HistoryViewModel>, int>(productDetailViewModel, merged, viewModels.Count);
         }
 
-        public async Task<Tuple<List<HistoryViewModel>, int>> GetProductHistoryByCustomer(Rm rm)
-        {
-            BizBookInventoryContext db = this.Repository.Db as BizBookInventoryContext;
-            List<SaleDetail> models = await db.SaleDetails.Include(x => x.Sale).Include(x => x.ProductDetail).Where(x => x.ShopId == rm.ShopId && x.Sale.CustomerId == rm.ParentId)
-                                          .ToListAsync();
-            List<SaleDetailViewModel> viewModels = models.ConvertAll(x => new SaleDetailViewModel(x)).ToList();
-            List<HistoryViewModel> historyViewModels = viewModels.ConvertAll(x => new HistoryViewModel(x, x.ProductDetailName, x.SalePricePerUnit)).ToList();
-            var list = historyViewModels.GroupBy(x => x.ProductDetailId).ToList();
+        //public async Task<Tuple<List<HistoryViewModel>, int>> GetProductHistoryByCustomer(Rm rm)
+        //{
+        //    BizBookInventoryContext db = this.Repository.Db as BizBookInventoryContext;
+        //    List<SaleDetail> models = await db.SaleDetails.Include(x => x.Sale).Include(x => x.ProductDetail).Where(x => x.ShopId == rm.ShopId && x.Sale.CustomerId == rm.ParentId)
+        //                                  .ToListAsync();
+        //    List<SaleDetailViewModel> viewModels = models.ConvertAll(x => new SaleDetailViewModel(x)).ToList();
+        //    List<HistoryViewModel> historyViewModels = viewModels.ConvertAll(x => new HistoryViewModel(x, x.ProductDetailName, x.SalePricePerUnit)).ToList();
+        //    var list = historyViewModels.GroupBy(x => x.ProductDetailId).ToList();
 
-            var histories = new List<HistoryViewModel>();
-            foreach (var v in list)
-            {
-                HistoryViewModel m = new HistoryViewModel();
-                string pid = v.Key;
-                var pList = v.ToList();
-                m.ProductName = pList.First().ProductName;
-                m.ProductDetailId = pid;
-                m.Quantity = pList.Sum(x => x.Quantity);
-                m.Total = pList.Sum(x => x.Total);
-                if (m.Quantity > 0)
-                {
-                    m.UnitPrice = m.Total / m.Quantity;
-                }
+        //    var histories = new List<HistoryViewModel>();
+        //    foreach (var v in list)
+        //    {
+        //        HistoryViewModel m = new HistoryViewModel();
+        //        string pid = v.Key;
+        //        var pList = v.ToList();
+        //        m.ProductName = pList.First().ProductName;
+        //        m.ProductDetailId = pid;
+        //        m.Quantity = pList.Sum(x => x.Quantity);
+        //        m.Total = pList.Sum(x => x.Total);
+        //        if (m.Quantity > 0)
+        //        {
+        //            m.UnitPrice = m.Total / m.Quantity;
+        //        }
 
-                m.Paid = pList.Sum(x => x.Paid);
-                m.Due = pList.Sum(x => x.Due);
-                histories.Add(m);
-            }
+        //        m.Paid = pList.Sum(x => x.Paid);
+        //        m.Due = pList.Sum(x => x.Due);
+        //        histories.Add(m);
+        //    }
 
-            return new Tuple<List<HistoryViewModel>, int>(histories, histories.Count);
-        }
+        //    return new Tuple<List<HistoryViewModel>, int>(histories, histories.Count);
+        //}
 
 
 
@@ -312,93 +314,93 @@ namespace ServiceLibrary.Products
             return c;
         }
 
-        public bool AddWcProductDetail(ProductDetail detail, BizBookInventoryContext db)
-        {
-            ProductDetail dbProductDetail = db.ProductDetails.FirstOrDefault(x => x.ShopId == detail.ShopId && x.WcId == detail.WcId && x.WcVariationId == detail.WcVariationId);
+        //public bool AddWcProductDetail(ProductDetail detail, BizBookInventoryContext db)
+        //{
+        //    ProductDetail dbProductDetail = db.ProductDetails.FirstOrDefault(x => x.ShopId == detail.ShopId && x.WcId == detail.WcId && x.WcVariationId == detail.WcVariationId);
 
-            if (dbProductDetail == null)
-            {
-                db.ProductDetails.Add(detail);
-                db.SaveChanges();
-            }
-            else
-            {
-                dbProductDetail.SalePrice = detail.SalePrice;
-                dbProductDetail.Modified = DateTime.Now;
-                db.SaveChanges();
-            }
+        //    if (dbProductDetail == null)
+        //    {
+        //        db.ProductDetails.Add(detail);
+        //        db.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        dbProductDetail.SalePrice = detail.SalePrice;
+        //        dbProductDetail.Modified = DateTime.Now;
+        //        db.SaveChanges();
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        public ProductDetail GetProductDetailFromWcProductDetail(ProductDetail detail, BizBookInventoryContext db)
-        {
-            string shopId = detail.ShopId;
-            ProductDetail productDetail = db.ProductDetails.FirstOrDefault(
-                x => x.ShopId == shopId && x.WcId == detail.WcId && x.WcVariationId == detail.WcVariationId);
-            if (productDetail != null)
-            {
-                return null;
-            }
+        //public ProductDetail GetProductDetailFromWcProductDetail(ProductDetail detail, BizBookInventoryContext db)
+        //{
+        //    string shopId = detail.ShopId;
+        //    ProductDetail productDetail = db.ProductDetails.FirstOrDefault(
+        //        x => x.ShopId == shopId && x.WcId == detail.WcId && x.WcVariationId == detail.WcVariationId);
+        //    if (productDetail != null)
+        //    {
+        //        return null;
+        //    }
 
-            ProductCategory productCategory = this.GetWcProductCategory(detail, db, shopId);
-            BrandService brandService = new BrandService(new BaseRepository<Brand>(db));
-            Brand brand = brandService.GetDefaultBrand(detail.ShopId, detail.CreatedBy);
+        //    ProductCategory productCategory = this.GetWcProductCategory(detail, db, shopId);
+        //    BrandService brandService = new BrandService(new BaseRepository<Brand>(db));
+        //    Brand brand = brandService.GetDefaultBrand(detail.ShopId, detail.CreatedBy);
 
-            string barCode = GetBarcode2(shopId);
+        //    string barCode = GetBarcode2(shopId);
 
-            productDetail = new ProductDetail()
-            {
-                CreatedBy = detail.CreatedBy,
-                ModifiedBy = detail.ModifiedBy,
-                CreatedFrom = "System",
-                ShopId = shopId,
-                IsActive = true,
-                Id = Guid.NewGuid().ToString(),
-                Created = DateTime.Now,
-                Modified = DateTime.Now,
-                Name = detail.Name.Cut(128),
-                ProductCode = this.GetProductCode(detail.Name),
-                BarCode = barCode,
-                BrandId = brand.Id,
-                CostPrice = 0,
-                DealerPrice = 0,
-                OnHand = 0,
-                ProductCategoryId = productCategory.Id,
-                SalePrice = detail.SalePrice,
-                WcId = (int)detail.WcId,
-                WcVariationId = (int)detail.WcVariationId,
-                HasUniqueSerial = false,
-            };
+        //    productDetail = new ProductDetail()
+        //    {
+        //        CreatedBy = detail.CreatedBy,
+        //        ModifiedBy = detail.ModifiedBy,
+        //        CreatedFrom = "System",
+        //        ShopId = shopId,
+        //        IsActive = true,
+        //        Id = Guid.NewGuid().ToString(),
+        //        Created = DateTime.Now,
+        //        Modified = DateTime.Now,
+        //        Name = detail.Name.Cut(128),
+        //        ProductCode = this.GetProductCode(detail.Name),
+        //        BarCode = barCode,
+        //        BrandId = brand.Id,
+        //        CostPrice = 0,
+        //        DealerPrice = 0,
+        //        OnHand = 0,
+        //        ProductCategoryId = productCategory.Id,
+        //        SalePrice = detail.SalePrice,
+        //        WcId = (int)detail.WcId,
+        //        WcVariationId = (int)detail.WcVariationId,
+        //        HasUniqueSerial = false,
+        //    };
 
-            return productDetail;
-        }
+        //    return productDetail;
+        //}
 
-        private ProductCategory GetWcProductCategory(ProductDetail detail, BizBookInventoryContext db, string shopId)
-        {
-            ProductCategory category =
-                db.ProductCategories.FirstOrDefault(x => x.ShopId == shopId && x.WcId == detail.WcCategoryId);
+        //private ProductCategory GetWcProductCategory(ProductDetail detail, BizBookInventoryContext db, string shopId)
+        //{
+        //    ProductCategory category =
+        //        db.ProductCategories.FirstOrDefault(x => x.ShopId == shopId && x.WcId == detail.WcCategoryId);
 
-            if (category == null)
-            {
-                ProductGroup productGroup = this.GetDefaultProductGroup(db, shopId, detail.CreatedBy);
-                category = new ProductCategory();
-                category.Id = Guid.NewGuid().ToString();
-                category.Created = DateTime.Now;
-                category.Modified = DateTime.Now;
-                category.CreatedBy = detail.CreatedBy;
-                category.ModifiedBy = detail.ModifiedBy;
-                category.ShopId = shopId;
-                category.CreatedFrom = "Server";
-                category.Name = detail.ProductCategory.Name;
-                category.WcId = detail.ProductCategory.WcId;
-                category.ProductGroupId = productGroup.Id;
-                db.ProductCategories.Add(category);
-                db.SaveChanges();
-            }
+        //    if (category == null)
+        //    {
+        //        ProductGroup productGroup = this.GetDefaultProductGroup(db, shopId, detail.CreatedBy);
+        //        category = new ProductCategory();
+        //        category.Id = Guid.NewGuid().ToString();
+        //        category.Created = DateTime.Now;
+        //        category.Modified = DateTime.Now;
+        //        category.CreatedBy = detail.CreatedBy;
+        //        category.ModifiedBy = detail.ModifiedBy;
+        //        category.ShopId = shopId;
+        //        category.CreatedFrom = "Server";
+        //        category.Name = detail.ProductCategory.Name;
+        //        category.WcId = detail.ProductCategory.WcId;
+        //        category.ProductGroupId = productGroup.Id;
+        //        db.ProductCategories.Add(category);
+        //        db.SaveChanges();
+        //    }
 
-            return category;
-        }
+        //    return category;
+        //}
 
         public ProductGroup GetDefaultProductGroup(BizBookInventoryContext db, string shopId, string username)
         {
@@ -425,21 +427,22 @@ namespace ServiceLibrary.Products
 
         public async Task<Tuple<List<ProductDetailViewModel>, int>> SearchByWarehouseAsync(ProductDetailRequestModel request)
         {
-            BizBookInventoryContext db = base.Repository.Db as BizBookInventoryContext;
-            var tuple = await base.SearchAsync(request);
-            var whProducts = db.WarehouseProducts.Where(x => x.ShopId == request.ShopId && x.WarehouseId == request.WarehouseId);
-            var enumerable = from m in tuple.Item1
-                             join wh in whProducts on m.Id equals wh.ProductDetailId into ps
-                             from wh in ps.DefaultIfEmpty()
-                             select new { ProductDetail = m, Quantity = wh?.OnHand ?? 0 };
-            foreach (var v in enumerable)
-            {
-                v.ProductDetail.OnHand = v.Quantity;
-            }
+            //BizBookInventoryContext db = base.Repository.Db as BizBookInventoryContext;
+            //var tuple = await base.SearchAsync(request);
+            //var whProducts = db.WarehouseProducts.Where(x => x.ShopId == request.ShopId && x.WarehouseId == request.WarehouseId);
+            //var enumerable = from m in tuple.Item1
+            //                 join wh in whProducts on m.Id equals wh.ProductDetailId into ps
+            //                 from wh in ps.DefaultIfEmpty()
+            //                 select new { ProductDetail = m, Quantity = wh?.OnHand ?? 0 };
+            //foreach (var v in enumerable)
+            //{
+            //    v.ProductDetail.OnHand = v.Quantity;
+            //}
 
-            var list = enumerable.Select(x => x.ProductDetail).ToList();
-            var tuple1 = new Tuple<List<ProductDetailViewModel>, int>(list, tuple.Item2);
-            return tuple1;
+            //var list = enumerable.Select(x => x.ProductDetail).ToList();
+            //var tuple1 = new Tuple<List<ProductDetailViewModel>, int>(list, tuple.Item2);
+            //return tuple1;
+            return new Tuple<List<ProductDetailViewModel>, int>(new List<ProductDetailViewModel>(), 0);
         }
     }
 }

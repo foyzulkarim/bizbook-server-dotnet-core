@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Model.Model;
+using Model.Model.Purchases;
 using ViewModel;
 
 namespace RequestModel.Shops
