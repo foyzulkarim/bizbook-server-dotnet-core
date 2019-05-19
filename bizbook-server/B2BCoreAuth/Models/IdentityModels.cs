@@ -18,12 +18,6 @@ namespace B2BCoreApi.Models
     {
         public ApplicationRole(string name) : base(name)
         {
-
-        }
-
-        public ApplicationRole()
-        {
-
         }
 
         [Column(TypeName = "varchar(64)")]
@@ -31,6 +25,9 @@ namespace B2BCoreApi.Models
 
         [Column(TypeName = "varchar(32)")]
         public string DefaultRoute { get; set; }
+
+        [Column(TypeName = "varchar(128)")]
+        public string ShopId { get; set; }
     }
 
     public enum ResourceType
@@ -58,6 +55,7 @@ namespace B2BCoreApi.Models
         public bool IsPublic { get; set; }
 
         public ResourceType ResourceType { get; set; }
+
         public virtual ICollection<ApplicationPermission> Permissions { get; set; }
     }
 
@@ -75,10 +73,16 @@ namespace B2BCoreApi.Models
 
         [Column(TypeName = "varchar(128)")]
         public string ResourceId { get; set; }
-        
+
+
         public string RoleId { get; set; }
+
         public bool IsAllowed { get; set; }
+
         public bool IsDisabled { get; set; }
+
+        [Column(TypeName = "varchar(128)")]
+        public string ShopId { get; set; }
 
         [ForeignKey("ResourceId")]
         public virtual ApplicationResource Resource { get; set; }
@@ -90,6 +94,6 @@ namespace B2BCoreApi.Models
 
     public class ApplicationUserRole : IdentityUserRole<string>
     {
-        
+
     }
 }

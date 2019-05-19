@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace B2BCoreApi.Migrations
 {
     [DbContext(typeof(SecurityDbContext))]
-    [Migration("20180904050606_Init")]
+    [Migration("20190519042822_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,6 +35,9 @@ namespace B2BCoreApi.Migrations
                         .HasColumnType("varchar(128)");
 
                     b.Property<string>("RoleId");
+
+                    b.Property<string>("ShopId")
+                        .HasColumnType("varchar(128)");
 
                     b.HasKey("Id");
 
@@ -103,6 +106,8 @@ namespace B2BCoreApi.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("RoleId");
+
                     b.Property<string>("RoleName")
                         .HasColumnType("varchar(128)");
 
@@ -125,6 +130,8 @@ namespace B2BCoreApi.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -259,7 +266,8 @@ namespace B2BCoreApi.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("varchar(64)");
 
-                    b.ToTable("ApplicationRole");
+                    b.Property<string>("ShopId")
+                        .HasColumnType("varchar(128)");
 
                     b.HasDiscriminator().HasValue("ApplicationRole");
                 });
@@ -268,9 +276,6 @@ namespace B2BCoreApi.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
 
-
-                    b.ToTable("ApplicationUserRole");
-
                     b.HasDiscriminator().HasValue("ApplicationUserRole");
                 });
 
@@ -278,11 +283,21 @@ namespace B2BCoreApi.Migrations
                 {
                     b.HasOne("B2BCoreApi.Models.ApplicationResource", "Resource")
                         .WithMany("Permissions")
-                        .HasForeignKey("ResourceId");
+                        .HasForeignKey("ResourceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("B2BCoreApi.Models.ApplicationRole", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("B2BCoreApi.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("B2BCoreApi.Models.ApplicationRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

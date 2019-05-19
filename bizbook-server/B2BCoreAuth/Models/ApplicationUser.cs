@@ -23,6 +23,11 @@ namespace B2BCoreApi.Models
         [Column(TypeName = "varchar(128)")]
         public string RoleName { get; set; }
 
+        public string RoleId { get; set; }
+
+        [ForeignKey("RoleId")]
+        public virtual ApplicationRole Role { get; set; }
+
         [NotMapped]
         public string ConnectionId { get; set; }
     }

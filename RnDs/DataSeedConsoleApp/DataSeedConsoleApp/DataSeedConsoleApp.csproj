@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\bizbook-server\B2BCoreAuth\B2BCoreApi.csproj" />
     <ProjectReference Include="..\..\..\bizbook-server\Model\Model.csproj" />
   </ItemGroup>
 

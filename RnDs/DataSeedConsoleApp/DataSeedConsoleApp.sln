@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSeedConsoleApp", "DataS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "..\..\bizbook-server\Model\Model.csproj", "{4AB3489B-C3AC-469E-8E23-7358BFA404ED}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B2BCoreApi", "..\..\bizbook-server\B2BCoreAuth\B2BCoreApi.csproj", "{0A694422-D659-4253-95C5-DC46BFD5E953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4AB3489B-C3AC-469E-8E23-7358BFA404ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AB3489B-C3AC-469E-8E23-7358BFA404ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AB3489B-C3AC-469E-8E23-7358BFA404ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A694422-D659-4253-95C5-DC46BFD5E953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A694422-D659-4253-95C5-DC46BFD5E953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A694422-D659-4253-95C5-DC46BFD5E953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A694422-D659-4253-95C5-DC46BFD5E953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
