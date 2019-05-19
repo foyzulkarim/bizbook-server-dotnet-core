@@ -24,3 +24,6 @@
 /bizbook-server/ApiTestProject/bin/Debug/netcoreapp2.2
 /bizbook-server/ApiTestProject/obj
 *.user
+/RnDs/DataSeedConsoleApp/.vs/DataSeedConsoleApp/v16/Server/sqlite3
+/RnDs/DataSeedConsoleApp/DataSeedConsoleApp/bin/Debug/netcoreapp2.2
+/RnDs/DataSeedConsoleApp/DataSeedConsoleApp/obj
