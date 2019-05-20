@@ -52,13 +52,14 @@ namespace B2BCoreApi.Auth
             return encodedJwt;
         }
 
-        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id, string shopId)
+        public ClaimsIdentity GenerateClaimsIdentity(string userName, string id, string shopId, string roleId)
         {
             return new ClaimsIdentity(new GenericIdentity(userName, "Token"), new[]
             {
                 new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Id, id),
                 new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.UserName, userName),
                 new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.ShopId, shopId),
+                new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.RoleId, roleId),
                 new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Rol,
                     Helpers.Constants.Strings.JwtClaims.ApiAccess)
             });
@@ -66,7 +67,7 @@ namespace B2BCoreApi.Auth
 
         /// <returns>Date converted to seconds since Unix epoch (Jan 1, 1970, midnight UTC).</returns>
         private static long ToUnixEpochDate(DateTime date)
-            => (long) Math.Round((date.ToUniversalTime() -
+            => (long)Math.Round((date.ToUniversalTime() -
                                   new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero))
                 .TotalSeconds);
 

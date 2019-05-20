@@ -7,7 +7,7 @@ namespace B2BCoreApi.Helpers
         {
             public static class JwtClaimIdentifiers
             {
-                public const string Rol = "rol", Id = "id", UserName = "username", ShopId="shopId";
+                public const string Rol = "rol", Id = "id", UserName = "username", ShopId = "shopId", RoleId = "roleId";
             }
 
             public static class JwtClaims

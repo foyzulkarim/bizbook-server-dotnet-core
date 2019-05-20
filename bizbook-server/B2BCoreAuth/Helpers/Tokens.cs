@@ -16,8 +16,7 @@ namespace B2BCoreApi.Helpers
             JwtIssuerOptions jwtOptions, ApplicationUser user, Employee employee, List<dynamic> roles, Shop shop,
             JsonSerializerSettings serializerSettings, SecurityDbContext db)
         {
-            var firstOrDefault = roles.FirstOrDefault(x => x.Name == user.RoleName);
-            string roleId = firstOrDefault == null ? "" : firstOrDefault.Id;
+            string roleId = identity.Claims.Single(c => c.Type == "roleId").Value;
             string id = identity.Claims.Single(c => c.Type == "id").Value;
             var name = user.FirstName + " " + user.LastName;
             string token = await jwtFactory.GenerateEncodedToken(user.UserName, identity);

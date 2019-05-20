@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.5" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\bizbook-server\B2BCoreAuth\B2BCoreApi.csproj" />
     <ProjectReference Include="..\..\..\bizbook-server\Model\Model.csproj" />
   </ItemGroup>

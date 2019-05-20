@@ -113,7 +113,7 @@ namespace B2BCoreApi.Controllers
             if (await _userManager.CheckPasswordAsync(userToVerify, password))
             {
                 ClaimsIdentity identity =
-                    _jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id, userToVerify.ShopId);
+                    _jwtFactory.GenerateClaimsIdentity(userName, userToVerify.Id, userToVerify.ShopId, userToVerify.RoleId);
                 ClaimsIdentity claimsIdentity = await Task.FromResult(identity);
 
                 return claimsIdentity;
