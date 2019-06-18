@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace B2BCoreApi.Controllers
 {
-    //[BizBookAuthorization]
+    [BizBookAuthorization]
     public abstract class BaseCommandController<T, TRm, TVm> : ControllerBase where T : Entity where TRm : RequestModel<T> where TVm : BaseViewModel<T>
     {
         public ILogger Logger;
@@ -31,7 +31,7 @@ namespace B2BCoreApi.Controllers
         [HttpPost]
         [Route("Add")]
         [ActionName("Add")]
-        //[EntitySaveFilter]
+        [EntitySaveFilter]
         public virtual ActionResult Add([FromBody] T model)
         {
             T data = model;
@@ -64,7 +64,7 @@ namespace B2BCoreApi.Controllers
         [Route("Edit")]
         [ActionName("Edit")]
         [EntityEditFilter]
-        public virtual ActionResult Put(T model)
+        public virtual ActionResult Put([FromBody]T model)
         {
             T data = model;
             if (!ModelState.IsValid)
