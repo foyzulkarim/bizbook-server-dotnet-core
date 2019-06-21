@@ -5,6 +5,7 @@ using System.Text;
 using B2BCoreApi.Controllers;
 using B2BCoreApi.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using RestSharp;
 using Shouldly;
 
@@ -43,12 +44,17 @@ namespace ApiIntegrationTestProject
             LoginViewModel model = new LoginViewModel()
             {
                 Username = $"admin@demo1.com",
-                Password = "Password@123"
+                Password = "Pass@123"
             };
 
             request.AddJsonBody(model);
             var response = client.Execute(request);
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
+
+            var content = response.Content;
+            var o = JsonConvert.DeserializeObject<dynamic>(content);
+            string oAccessToken = o["access_token"].ToString();
+            oAccessToken.ShouldNotBeNullOrWhiteSpace();
         }
     }
 }
