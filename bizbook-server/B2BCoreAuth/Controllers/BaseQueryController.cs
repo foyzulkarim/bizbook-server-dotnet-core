@@ -44,12 +44,8 @@ namespace B2BCoreApi.Controllers
         {
             try
             {
-                //var reader = new StreamReader(Request.Body);
-                //string s = reader.ReadToEnd();
-                //TRm rm = JsonConvert.DeserializeObject<TRm>(s);
-                //rm.ShopId = AppUser.ShopId;
                 Tuple<List<TVm>, int> content = await Service.SearchAsync(request);
-                return Ok(content);                
+                return Ok(content);
             }
             catch (Exception exception)
             {
@@ -57,7 +53,7 @@ namespace B2BCoreApi.Controllers
                 return StatusCode(500, exception.Message);
             }
         }
-        
+
         [Route("Dropdown")]
         [ActionName("Dropdown")]
         [HttpPost]
@@ -101,7 +97,7 @@ namespace B2BCoreApi.Controllers
                 request.IsIncludeParents = true;
                 Tuple<List<TVm>, int> content = await Service.SearchAsync(request);
                 TVm vm = content.Item1.FirstOrDefault();
-                return Ok(vm);                
+                return Ok(vm);
             }
             catch (Exception exception)
             {

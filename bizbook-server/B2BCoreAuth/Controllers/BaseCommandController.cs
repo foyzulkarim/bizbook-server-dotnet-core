@@ -116,26 +116,6 @@ namespace B2BCoreApi.Controllers
             }
         }
 
-        //[Route("Sync")]
-        //[ActionName("Sync")]
-        //[HttpPost]
-        //public virtual IHttpActionResult Sync(List<T> models)
-        //{
-        //    var m = models.Select(x => new { x.Id, x.Modified, x.ModifiedBy }).ToList();
-        //    string s = JsonConvert.SerializeObject(m);
-        //    Logger.Information(this.typeName + " Sync models: {@S}", s);
-        //    try
-        //    {
-        //        bool add = this.Service.SyncList(models);
-        //        return this.Ok(add);
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Logger.Fatal(exception, "Exception occurred while saving ProductCategory Groups");
-        //        return this.InternalServerError(exception);
-        //    }
-        //}
-
         protected Entity AddCommonValues(Entity fromEntity, Entity toEntity)
         {
             toEntity.Id = Guid.NewGuid().ToString();

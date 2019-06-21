@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using System.Web.Http;
-using ServiceLibrary.Shops;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Model;
+using ServiceLibrary.Shops;
 using Rm = RequestModel.Shops.BrandRequestModel;
 using M = Model.Model.Products.Brand;
 using Vm = ViewModel.Shops.BrandViewModel;
-using Microsoft.Extensions.Logging;
 
-namespace B2BCoreApi.Controllers.QueryControllers.Shops
+namespace B2BCoreApi.Controllers.QueryControllers.Products
 {
 
     [Route("api/BrandQuery")]
@@ -23,6 +14,6 @@ namespace B2BCoreApi.Controllers.QueryControllers.Shops
     {
         public BrandQueryController(BizBookInventoryContext db, ILogger<BrandQueryController> logger) : base(new BrandService(new BaseRepository<M>(db)), logger)
         {
-        }        
+        }
     }
 }
