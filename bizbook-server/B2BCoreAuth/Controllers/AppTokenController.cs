@@ -88,7 +88,7 @@ namespace B2BCoreApi.Controllers
                 roles.Add(r);
             }
 
-            string jwt = await Tokens.GenerateJwt(
+            var jwt = await Tokens.GenerateJwt(
                 identity,
                 _jwtFactory,
                 _jwtOptions,
@@ -96,7 +96,7 @@ namespace B2BCoreApi.Controllers
                 employeeInfo,
                 roles,
                 shop,
-                new JsonSerializerSettings { Formatting = Formatting.Indented },
+                new JsonSerializerSettings { Formatting = Formatting.None },
                 _securityDb);
             return Ok(jwt);
         }

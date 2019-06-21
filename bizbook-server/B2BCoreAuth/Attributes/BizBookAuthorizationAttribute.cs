@@ -4,7 +4,10 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using B2BCoreApi.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
@@ -13,16 +16,25 @@ namespace B2BCoreApi.Attributes
 {
     public class BizBookAuthorizationAttribute : AuthorizeAttribute, IAuthorizationFilter
     {
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            ClaimsPrincipal user = context.HttpContext.User;
-            ApplicationUser appUser = new ApplicationUser()
+            if (context.HttpContext.User.Identity.IsAuthenticated)
             {
-                Id = user.Claims.First(x=>x.Type==Helpers.Constants.Strings.JwtClaimIdentifiers.Id).Value,
-                ShopId = user.Claims.First(x=>x.Type== Helpers.Constants.Strings.JwtClaimIdentifiers.ShopId).Value,
-                UserName = user.Claims.First(x => x.Type == Helpers.Constants.Strings.JwtClaimIdentifiers.UserName).Value
-            };
-            context.HttpContext.Items["AppUser"] = appUser;
+                ClaimsPrincipal user = context.HttpContext.User;
+                ApplicationUser appUser = new ApplicationUser()
+                {
+                    Id = user.Claims.First(x => x.Type == Helpers.Constants.Strings.JwtClaimIdentifiers.Id).Value,
+                    ShopId = user.Claims.First(x => x.Type == Helpers.Constants.Strings.JwtClaimIdentifiers.ShopId).Value,
+                    UserName = user.Claims.First(x => x.Type == Helpers.Constants.Strings.JwtClaimIdentifiers.UserName).Value
+                };
+                context.HttpContext.Items["AppUser"] = appUser;
+            }
+            else
+            {
+                context.Result = new StatusCodeResult(StatusCodes.Status401Unauthorized);
+            }
+
             //                controller.AppUser = user;
         }
 

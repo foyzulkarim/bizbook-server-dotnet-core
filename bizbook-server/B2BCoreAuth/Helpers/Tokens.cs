@@ -12,7 +12,7 @@ namespace B2BCoreApi.Helpers
 {
     public class Tokens
     {
-        public static async Task<string> GenerateJwt(ClaimsIdentity identity, IJwtFactory jwtFactory,
+        public static async Task<object> GenerateJwt(ClaimsIdentity identity, IJwtFactory jwtFactory,
             JwtIssuerOptions jwtOptions, ApplicationUser user, Employee employee, List<dynamic> roles, Shop shop,
             JsonSerializerSettings serializerSettings, SecurityDbContext db)
         {
@@ -45,8 +45,8 @@ namespace B2BCoreApi.Helpers
                 expires_in = (int)jwtOptions.ValidFor.TotalSeconds,
                 token_type = "bearer"
             };
-
-            return JsonConvert.SerializeObject(response, serializerSettings);
+            return response;
+            // return JsonConvert.SerializeObject(response, serializerSettings);
         }
     }
 }
