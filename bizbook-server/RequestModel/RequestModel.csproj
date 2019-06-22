@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Reports\AccountReportRequestModel.cs" />
+    <Compile Remove="Reports\ProductReportRequestModel.cs" />
+    <Compile Remove="Reports\SaleReportRequestModel.cs" />
+    <Compile Remove="Warehouses\DamageRequestModel.cs" />
+    <Compile Remove="Warehouses\StockTransferDetailRequestModel.cs" />
+    <Compile Remove="Warehouses\StockTransferRequestModel.cs" />
+    <Compile Remove="Warehouses\WarehouseHistoryRequestModel.cs" />
+    <Compile Remove="Warehouses\WarehouseRequestModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Warehouses\" />
+  </ItemGroup>
+
+</Project>
