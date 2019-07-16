@@ -156,29 +156,29 @@ namespace B2BCoreApi
                 options.ModelBinderProviders.Insert(3, employeeInfoBinder);
                 options.ModelBinderProviders.Insert(4, brandBinder);
 
-                options.ModelBinderProviders.Insert(6, dealerBinder);
-                options.ModelBinderProviders.Insert(7, shopBinder);
-                options.ModelBinderProviders.Insert(8, supplierBinder);
+                options.ModelBinderProviders.Insert(5, dealerBinder);
+                options.ModelBinderProviders.Insert(6, shopBinder);
+                options.ModelBinderProviders.Insert(7, supplierBinder);
 
-                options.ModelBinderProviders.Insert(10, productCategoryBinder);
-                options.ModelBinderProviders.Insert(11, productDetailBinder);
-                options.ModelBinderProviders.Insert(12, productGroupBinder);
+                options.ModelBinderProviders.Insert(8, productCategoryBinder);
+                options.ModelBinderProviders.Insert(9, productDetailBinder);
+                options.ModelBinderProviders.Insert(10, productGroupBinder);
 
-                options.ModelBinderProviders.Insert(15, purchaseDetailBinder);
-                options.ModelBinderProviders.Insert(16, purchaseBinder);
-                options.ModelBinderProviders.Insert(17, customerBySaleBinder);
-                options.ModelBinderProviders.Insert(18, dailySalesOverviewBinder);
-                options.ModelBinderProviders.Insert(19, salesByProductBinder);
+                options.ModelBinderProviders.Insert(11, purchaseDetailBinder);
+                options.ModelBinderProviders.Insert(12, purchaseBinder);
+                options.ModelBinderProviders.Insert(13, customerBySaleBinder);
+                options.ModelBinderProviders.Insert(14, dailySalesOverviewBinder);
+                options.ModelBinderProviders.Insert(15, salesByProductBinder);
 
-                options.ModelBinderProviders.Insert(23, saleDetailBinder);
-                options.ModelBinderProviders.Insert(24, accountHeadBinder);
+                options.ModelBinderProviders.Insert(16, saleDetailBinder);
+                options.ModelBinderProviders.Insert(17, accountHeadBinder);
 
-                options.ModelBinderProviders.Insert(26, transactionBinder);
+                options.ModelBinderProviders.Insert(18, transactionBinder);
 
-                options.ModelBinderProviders.Insert(33, messageBinder);
-                options.ModelBinderProviders.Insert(34, smsHistoryBinder);
+                options.ModelBinderProviders.Insert(19, messageBinder);
+                options.ModelBinderProviders.Insert(20, smsHistoryBinder);
 
-                options.ModelBinderProviders.Insert(36, smsBinder);
+                options.ModelBinderProviders.Insert(21, smsBinder);
             });
         }
 
