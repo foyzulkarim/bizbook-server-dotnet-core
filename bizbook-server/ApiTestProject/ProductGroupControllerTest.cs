@@ -19,10 +19,20 @@ namespace ApiIntegrationTestProject
         {
             var client = new RestClient(Constants.BaseUrl);
             var request = new RestRequest("api/ProductGroup/Add", Method.POST, DataFormat.Json);
+            var token = TestHelper.GetToken();
+            request.AddHeader("Authorization", $"Bearer {token}");
+
             ProductGroup model = new ProductGroup()
             {
-                Name = "Group",
-                IsActive = true
+                Id = Guid.NewGuid().ToString(),
+                Created = DateTime.Now,
+                Modified = DateTime.Now,
+                CreatedBy = "1",
+                ModifiedBy = "1",
+                CreatedFrom = "Test",
+                IsActive = true,
+                ShopId = "1",
+                Name = $"ProductGroup-{DateTime.Now:ssmmhhddMMyyyy}",
             };
 
             request.AddJsonBody(model);

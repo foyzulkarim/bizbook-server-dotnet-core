@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.Model.Products;
+using RequestModel.Products;
 using RequestModel.Shops;
 using RestSharp;
 using Shouldly;
@@ -21,7 +22,7 @@ namespace ApiIntegrationTestProject
             var token = TestHelper.GetToken();
             request.AddHeader("Authorization", $"Bearer {token}");
 
-            var model = new BrandRequestModel("")
+            var model = new ProductGroupRequestModel("")
             {
                 ShopId = "1"
             };
