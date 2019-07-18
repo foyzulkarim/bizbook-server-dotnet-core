@@ -12,8 +12,6 @@ namespace RequestModel.Shops
             keyword, orderBy, isAscending)
         {
         }
-
-
         protected override Expression<Func<Brand, bool>> GetExpression()
         {
             if (!string.IsNullOrWhiteSpace(Keyword))
@@ -30,7 +28,7 @@ namespace RequestModel.Shops
 
         public override Expression<Func<Brand, DropdownViewModel>> Dropdown()
         {
-            return x => new DropdownViewModel() {Id = x.Id, Text = x.Name};
+            return x => new DropdownViewModel() { Id = x.Id, Text = x.Name };
         }
     }
 }
