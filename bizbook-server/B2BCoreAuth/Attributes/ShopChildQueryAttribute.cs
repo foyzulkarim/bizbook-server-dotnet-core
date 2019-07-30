@@ -21,9 +21,19 @@ namespace B2BCoreApi.Attributes
             var reader = new StreamReader(requestBody);
             string s = reader.ReadToEnd();
             var actionDescriptorParameters = actionContext.ActionDescriptor.Parameters;
-            Type type = Type.GetType(actionDescriptorParameters[0].ParameterType.AssemblyQualifiedName);
-            var deserializeObject = JsonConvert.DeserializeObject(s, type);
-            actionContext.ActionArguments.Add("request", deserializeObject);
+
+            if (actionDescriptorParameters.Count > 0)
+            {
+
+                Type type = Type.GetType(actionDescriptorParameters[0].ParameterType.AssemblyQualifiedName);
+                var deserializeObject = JsonConvert.DeserializeObject(s, type);
+                actionContext.ActionArguments.Add("request", deserializeObject);
+            } else {
+
+                actionContext.ActionArguments.Add("request", new System.Dynamic.ExpandoObject());
+
+            }
+
 
             if (appUser is ApplicationUser user)
             {
