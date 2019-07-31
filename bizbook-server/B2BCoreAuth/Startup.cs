@@ -194,6 +194,7 @@ namespace B2BCoreApi
 
             app.UseAuthentication();
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }
