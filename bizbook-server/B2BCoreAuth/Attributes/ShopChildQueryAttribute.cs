@@ -26,7 +26,7 @@ namespace B2BCoreApi.Attributes
             {
 
                 Type type = Type.GetType(actionDescriptorParameters[0].ParameterType.AssemblyQualifiedName);
-                var deserializeObject = JsonConvert.DeserializeObject(s, type);
+                var deserializeObject = JsonConvert.DeserializeObject(s, type) ?? new System.Dynamic.ExpandoObject();
                 actionContext.ActionArguments.Add("request", deserializeObject);
             } else {
 
